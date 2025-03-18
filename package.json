@@ -1,14 +1,29 @@
 {
-  "name": "personal-site-astro",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^5.5.3"
-  }
+	"name": "personal-site-astro",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/svelte": "^7.0.6",
+		"astro": "^5.5.3",
+		"svelte": "^5.23.1"
+	},
+	"devDependencies": {
+		"@tailwindcss/vite": "^4.0.14",
+		"clsx": "^2.1.1",
+		"lightningcss": "^1.29.3",
+		"prettier": "^3.5.3",
+		"prettier-plugin-astro": "0.14.1",
+		"prettier-plugin-classnames": "^0.7.7",
+		"prettier-plugin-merge": "^0.7.2",
+		"prettier-plugin-tailwindcss": "^0.6.11",
+		"tailwind-merge": "^3.0.2",
+		"tailwindcss": "^4.0.14",
+		"typescript": "^5.8.2"
+	}
 }

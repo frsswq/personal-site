@@ -1,17 +1,26 @@
 <script lang="ts">
 	import { innerWidth } from 'svelte/reactivity/window';
+	import { tick } from 'svelte';
 	import type { Component } from 'svelte';
 
 	import FolderSection from './FolderSection.svelte';
 	import WhiteKeycaps from './WhiteKeycaps.svelte';
 	import WhiteMenu from './WhiteMenu.svelte';
 	import WhiteSwitch from './WhiteSwitch.svelte';
+	import SvgSpinnersBarsRotateFade from '../icons/SvgSpinnersBarsRotateFade.svelte';
 
 	const designItems: Component[] = [WhiteKeycaps, WhiteMenu, FolderSection, WhiteSwitch];
-
-	let screenWidth = $derived(innerWidth.current ?? 0);
 	const designItemContainerClass: string =
 		'flex h-fit w-full items-center justify-center gap-2.5 bg-white md:w-fit md:flex-col md:gap-4';
+
+	let screenWidth = $derived(innerWidth.current ?? 0);
+	let isLoading: boolean = $state(true);
+
+	$effect.pre(() => {
+		tick().then(() => {
+			isLoading = false;
+		});
+	});
 </script>
 
 <section>
@@ -24,15 +33,21 @@
 	<p
 		class="subtitle pt-2 text-center text-base font-medium tracking-tight text-zinc-500 md:pt-4 md:text-2xl"
 	>
-		Form studies, zero depedencies
+		Form studies with zero depedencies
 	</p>
 	<div class="flex w-full flex-col justify-center gap-4 py-8 md:flex-row md:py-12">
-		{#if screenWidth < 760}
-			{@render pseudoMasonry(1)}
-		{:else if screenWidth < 1280}
-			{@render pseudoMasonry(2)}
-		{:else}
-			{@render pseudoMasonry(3)}
+		{#if isLoading}
+			<SvgSpinnersBarsRotateFade
+				className="size-10 text-zinc-500 absolute left-1/2 top-1/2 -translate-1/2"
+			/>
+		{:else if !isLoading}
+			{#if screenWidth < 760}
+				{@render pseudoMasonry(1)}
+			{:else if screenWidth < 1280}
+				{@render pseudoMasonry(2)}
+			{:else}
+				{@render pseudoMasonry(3)}
+			{/if}
 		{/if}
 	</div>
 </section>

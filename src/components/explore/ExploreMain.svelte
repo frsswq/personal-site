@@ -24,15 +24,15 @@
 	<p
 		class="subtitle pt-2 text-center text-base font-medium tracking-tight text-zinc-500 md:pt-4 md:text-2xl"
 	>
-		Form studies with zero depedencies
+		Form studies, zero depedencies
 	</p>
 	<div class="flex w-full flex-col justify-center gap-4 py-8 md:flex-row md:py-12">
 		{#if screenWidth < 760}
-			{@render masonry(1)}
+			{@render pseudoMasonry(1)}
 		{:else if screenWidth < 1280}
-			{@render masonry(2)}
+			{@render pseudoMasonry(2)}
 		{:else}
-			{@render masonry(3)}
+			{@render pseudoMasonry(3)}
 		{/if}
 	</div>
 </section>
@@ -46,7 +46,7 @@
 	</div>
 {/snippet}
 
-{#snippet masonry(columnNums: 1 | 2 | 3)}
+{#snippet pseudoMasonry(columnNums: 1 | 2 | 3)}
 	{#if columnNums === 1}
 		{#each designItems as Item}
 			<div class={designItemContainerClass}>
@@ -54,42 +54,31 @@
 			</div>
 		{/each}
 	{:else if columnNums === 2}
-		<div class={designItemContainerClass}>
-			{#each designItems as Item, index}
-				{#if index % 2 === 0}
-					{@render designItemComponent(Item)}
-				{/if}
-			{/each}
-		</div>
-		<div class={designItemContainerClass}>
-			{#each designItems as Item, index}
-				{#if index % 2 !== 0}
-					{@render designItemComponent(Item)}
-				{/if}
-			{/each}
-		</div>
+		{#each { length: 2 }, i}
+			<div class={designItemContainerClass}>
+				{#each designItems as Item, index}
+					{#if index % 2 === 0 && i === 0}
+						{@render designItemComponent(Item)}
+					{:else if index % 2 !== 0 && i === 1}
+						{@render designItemComponent(Item)}
+					{/if}
+				{/each}
+			</div>
+		{/each}
 	{:else}
-		<div class={designItemContainerClass}>
-			{#each designItems as Item, index}
-				{#if index % 3 === 0}
-					{@render designItemComponent(Item)}
-				{/if}
-			{/each}
-		</div>
-		<div class={designItemContainerClass}>
-			{#each designItems as Item, index}
-				{#if index % 3 === 1}
-					{@render designItemComponent(Item)}
-				{/if}
-			{/each}
-		</div>
-		<div class={designItemContainerClass}>
-			{#each designItems as Item, index}
-				{#if index % 3 === 2}
-					{@render designItemComponent(Item)}
-				{/if}
-			{/each}
-		</div>
+		{#each { length: 3 }, i}
+			<div class={designItemContainerClass}>
+				{#each designItems as Item, index}
+					{#if index % 3 === 0 && i === 0}
+						{@render designItemComponent(Item)}
+					{:else if index % 3 === 1 && i === 1}
+						{@render designItemComponent(Item)}
+					{:else if index % 3 === 2 && i === 2}
+						{@render designItemComponent(Item)}
+					{/if}
+				{/each}
+			</div>
+		{/each}
 	{/if}
 {/snippet}
 

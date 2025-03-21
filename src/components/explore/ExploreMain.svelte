@@ -41,12 +41,12 @@
 				className="size-10 text-zinc-500 absolute left-1/2 top-1/2 -translate-1/2"
 			/>
 		{:else if !isLoading}
-			{#if screenWidth < 760}
-				{@render pseudoMasonry(1)}
-			{:else if screenWidth < 1280}
+			{#if screenWidth >= 1280}
+				{@render pseudoMasonry(3)}
+			{:else if screenWidth >= 768}
 				{@render pseudoMasonry(2)}
 			{:else}
-				{@render pseudoMasonry(3)}
+				{@render pseudoMasonry(1)}
 			{/if}
 		{/if}
 	</div>

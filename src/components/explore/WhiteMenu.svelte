@@ -13,11 +13,13 @@
 </script>
 
 <div
-	class="flex min-w-[250px] flex-col rounded-xs bg-zinc-200/80 leading-none tracking-tight text-zinc-600 md:min-w-[325px]"
+	class="flex w-[250px] flex-col rounded-xs bg-zinc-200/80 leading-none tracking-tight text-zinc-600
+		md:w-[325px]"
 >
 	{#each menuItems as { label, icon: Icon }, index}
 		<button
-			class="group mx-0.75 my-0.5 flex items-center justify-between rounded-xs px-1 hover:cursor-pointer hover:bg-zinc-300/80"
+			class="group mx-0.75 my-0.5 flex items-center justify-between rounded-xs px-1 hover:cursor-pointer
+				hover:bg-zinc-300/80"
 		>
 			<p class="m-2 group-hover:text-black">{label}</p>
 			<Icon className="my-2 mr-2.5 size-5 text-zinc-700 group-hover:text-black" />

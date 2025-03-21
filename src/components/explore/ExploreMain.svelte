@@ -1,9 +1,17 @@
 <script lang="ts">
+	import { innerWidth } from 'svelte/reactivity/window';
+	import type { Component } from 'svelte';
+
 	import FolderSection from './FolderSection.svelte';
 	import WhiteKeycaps from './WhiteKeycaps.svelte';
 	import WhiteMenu from './WhiteMenu.svelte';
+	import WhiteSwitch from './WhiteSwitch.svelte';
 
-	const designItems = [WhiteKeycaps, WhiteMenu, FolderSection];
+	const designItems: Component[] = [WhiteKeycaps, WhiteMenu, FolderSection, WhiteSwitch];
+
+	let screenWidth = $derived(innerWidth.current ?? 0);
+	const designItemContainerClass: string =
+		'flex h-fit w-full items-center justify-center gap-2.5 bg-white md:w-fit md:flex-col md:gap-4';
 </script>
 
 <section>
@@ -14,26 +22,76 @@
 		Handcrafted Designs<br />Built from Scratch
 	</h1>
 	<p
-		class="subtitle pt-2 text-center text-[1rem] font-medium tracking-tight text-zinc-500 md:pt-4 md:text-2xl"
+		class="subtitle pt-2 text-center text-base font-medium tracking-tight text-zinc-500 md:pt-4 md:text-2xl"
 	>
-		Zero dependencies. Pure vibes.
+		Form studies with zero depedencies
 	</p>
-	<div class="flex w-full flex-col justify-center pt-8 md:flex-row md:gap-x-4 md:pt-12">
-		<div
-			class="grid h-fit w-full grid-rows-1 items-center justify-center gap-2.5 bg-white md:w-fit md:grid-cols-2
-				md:items-start md:gap-4 xl:grid-cols-3"
-		>
-			{#each designItems as Item, index}
-				<div
-					class="flex h-fit w-[300px] items-center justify-center rounded-xl border border-zinc-200 bg-zinc-50 p-6.25
-						md:w-[375px]"
-				>
-					<Item />
-				</div>
-			{/each}
-		</div>
+	<div class="flex w-full flex-col justify-center gap-4 py-8 md:flex-row md:py-12">
+		{#if screenWidth < 760}
+			{@render masonry(1)}
+		{:else if screenWidth < 1280}
+			{@render masonry(2)}
+		{:else}
+			{@render masonry(3)}
+		{/if}
 	</div>
 </section>
+
+{#snippet designItemComponent(Item: Component)}
+	<div
+		class="flex h-fit w-[300px] items-center justify-center rounded-xl border border-zinc-200 bg-zinc-50 p-6.25
+			md:w-[375px]"
+	>
+		<Item />
+	</div>
+{/snippet}
+
+{#snippet masonry(columnNums: 1 | 2 | 3)}
+	{#if columnNums === 1}
+		{#each designItems as Item}
+			<div class={designItemContainerClass}>
+				{@render designItemComponent(Item)}
+			</div>
+		{/each}
+	{:else if columnNums === 2}
+		<div class={designItemContainerClass}>
+			{#each designItems as Item, index}
+				{#if index % 2 === 0}
+					{@render designItemComponent(Item)}
+				{/if}
+			{/each}
+		</div>
+		<div class={designItemContainerClass}>
+			{#each designItems as Item, index}
+				{#if index % 2 !== 0}
+					{@render designItemComponent(Item)}
+				{/if}
+			{/each}
+		</div>
+	{:else}
+		<div class={designItemContainerClass}>
+			{#each designItems as Item, index}
+				{#if index % 3 === 0}
+					{@render designItemComponent(Item)}
+				{/if}
+			{/each}
+		</div>
+		<div class={designItemContainerClass}>
+			{#each designItems as Item, index}
+				{#if index % 3 === 1}
+					{@render designItemComponent(Item)}
+				{/if}
+			{/each}
+		</div>
+		<div class={designItemContainerClass}>
+			{#each designItems as Item, index}
+				{#if index % 3 === 2}
+					{@render designItemComponent(Item)}
+				{/if}
+			{/each}
+		</div>
+	{/if}
+{/snippet}
 
 <style>
 	.title,

@@ -1,0 +1,20 @@
+---
+import DesignIcon from '../icons/IconoirDesignNib.svelte';
+
+const linkClass: string =
+	'font-regular rounded-lg border border-transparent px-2.5 py-2 text-sm text-zinc-500 hover:border-zinc-200/50 hover:bg-zinc-100/80 hover:text-black md:text-base md:font-medium ';
+---
+
+<nav>
+	<div
+		class="sticky top-0 left-0 flex h-10 items-center justify-center gap-x-0.5 border-b-[1.25px]
+			border-zinc-200 px-2 leading-none tracking-tighter md:h-12"
+	>
+		<div></div>
+		<div class="flex h-12 flex-row items-center justify-center">
+			<a href="/" class={linkClass} data-astro-prefetch>Home</a>
+			<a href="/explore" class={linkClass} data-astro-prefetch><DesignIcon className="size-5" /></a>
+			<a href="/blog" class={linkClass} data-astro-prefetch>Blog</a>
+		</div>
+	</div>
+</nav>

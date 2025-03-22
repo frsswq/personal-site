@@ -25,13 +25,13 @@
 
 <section>
 	<h1
-		class="title pt-8 text-center text-[2rem] leading-none font-bold tracking-tighter text-zinc-700 md:pt-12
+		class="title pt-8 text-center text-[2rem] leading-none font-bold tracking-tighter text-zinc-700 md:pt-10
 			md:text-[3.5rem]"
 	>
 		Handcrafted Designs<br />Built from Scratch
 	</h1>
 	<p
-		class="subtitle pt-2 text-center text-base font-medium tracking-tight text-zinc-500 md:pt-4 md:text-2xl"
+		class="subtitle pt-2 text-center text-base font-medium tracking-tight text-zinc-500 md:pt-2 md:text-2xl"
 	>
 		Form studies with zero depedencies
 	</p>

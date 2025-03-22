@@ -1,20 +1,50 @@
 ---
+import HomeIcon from '../icons/IconamoonSignDivisionSlashLight.svelte';
 import DesignIcon from '../icons/IconoirDesignNib.svelte';
+import WritingIcon from '../icons/HugeiconsQuillWrite01.svelte';
 
 const linkClass: string =
-	'font-regular rounded-lg border border-transparent px-2.5 py-2 text-sm text-zinc-500 hover:border-zinc-200/50 hover:bg-zinc-100/80 hover:text-black md:text-base md:font-medium ';
+	'nav-button font-regular rounded-lg border border-transparent px-2.5 py-2.5 text-sm text-zinc-500 hover:border-zinc-200/50 hover:bg-zinc-100/80 hover:text-black md:text-base md:font-medium flex gap-x-2 items-center justify-center relative';
 ---
 
 <nav>
 	<div
 		class="sticky top-0 left-0 flex h-10 items-center justify-center gap-x-0.5 border-b-[1.25px]
-			border-zinc-200 px-2 leading-none tracking-tighter md:h-12"
+			border-zinc-200 px-2 leading-none tracking-tighter md:h-15"
 	>
 		<div></div>
-		<div class="flex h-12 flex-row items-center justify-center">
-			<a href="/" class={linkClass} data-astro-prefetch>Home</a>
-			<a href="/explore" class={linkClass} data-astro-prefetch><DesignIcon className="size-5" /></a>
-			<a href="/blog" class={linkClass} data-astro-prefetch>Blog</a>
+		<div class="flex h-12 items-center justify-center">
+			<a href="/" data-text="Home" class={linkClass} data-astro-prefetch
+				><HomeIcon className="size-5" /></a
+			>
+			<a href="/explore" data-text="Design" class={linkClass} data-astro-prefetch
+				><DesignIcon className="size-5" /></a
+			>
+			<a href="/blog" data-text="Blog" class={linkClass} data-astro-prefetch
+				><WritingIcon className="size-5" /></a
+			>
 		</div>
 	</div>
 </nav>
+
+<style>
+	.nav-button::before {
+		display: none;
+		content: attr(data-text);
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		font-size: 0.875rem;
+		line-height: 1;
+
+		top: 150%;
+		padding: 0.5rem 0.6rem 0.5rem 0.5rem;
+		background-color: var(--color-zinc-50);
+		border: 0.5px solid var(--color-zinc-200);
+		border-radius: 0.25rem;
+	}
+
+	.nav-button:hover::before {
+		display: block;
+	}
+</style>

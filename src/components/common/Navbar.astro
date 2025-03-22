@@ -4,7 +4,7 @@ import DesignIcon from '../icons/IconoirDesignNib.svelte';
 import WritingIcon from '../icons/HugeiconsQuillWrite01.svelte';
 
 const linkClass: string =
-	'nav-button font-regular rounded-lg border border-transparent px-2.5 py-2.5 text-sm text-zinc-500 hover:border-zinc-200/50 hover:bg-zinc-100/80 hover:text-black md:text-base md:font-medium flex gap-x-2 items-center justify-center relative';
+	'nav-button rounded-md border border-transparent px-2.5 py-2.5 text-sm text-zinc-500 hover:border-zinc-200/50 hover:bg-zinc-100/80 hover:text-black md:text-base tracking-tight leading-none flex gap-x-2 items-center justify-center relative';
 ---
 
 <nav>
@@ -17,7 +17,7 @@ const linkClass: string =
 			<a href="/" data-text="Home" class={linkClass} data-astro-prefetch
 				><HomeIcon className="size-5" /></a
 			>
-			<a href="/explore" data-text="Design" class={linkClass} data-astro-prefetch
+			<a href="/design" data-text="Design" class={linkClass} data-astro-prefetch
 				><DesignIcon className="size-5" /></a
 			>
 			<a href="/blog" data-text="Blog" class={linkClass} data-astro-prefetch
@@ -32,12 +32,11 @@ const linkClass: string =
 		display: none;
 		content: attr(data-text);
 		position: absolute;
-		top: 50%;
 		transform: translateY(-50%);
-		font-size: 0.875rem;
-		line-height: 1;
+		top: 110%;
+		animation: scale-in 0.2s forwards;
 
-		top: 150%;
+		font-size: 0.875rem;
 		padding: 0.5rem 0.6rem 0.5rem 0.5rem;
 		background-color: var(--color-zinc-50);
 		border: 0.5px solid var(--color-zinc-200);
@@ -46,5 +45,16 @@ const linkClass: string =
 
 	.nav-button:hover::before {
 		display: block;
+	}
+
+	@keyframes scale-in {
+		0% {
+			opacity: 0;
+			transform: rotateX(-10deg) scale(0.9);
+		}
+		100% {
+			opacity: 1;
+			transform: rotateX(0deg) scale(1);
+		}
 	}
 </style>

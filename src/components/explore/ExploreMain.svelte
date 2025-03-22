@@ -3,7 +3,7 @@
 	import { tick } from 'svelte';
 	import type { Component } from 'svelte';
 
-	import FolderSection from './FolderSection.svelte';
+	import FolderSection from './OrangeFolder.svelte';
 	import WhiteKeycaps from './WhiteKeycaps.svelte';
 	import WhiteMenu from './WhiteMenu.svelte';
 	import WhiteSwitch from './WhiteSwitch.svelte';
@@ -23,7 +23,7 @@
 	});
 </script>
 
-<section>
+<main>
 	<h1
 		class="title pt-8 text-center text-[2rem] leading-none font-bold tracking-tighter text-zinc-700 md:pt-10
 			md:text-[3.5rem]"
@@ -35,7 +35,7 @@
 	>
 		Form studies with zero depedencies
 	</p>
-	<div class="flex w-full flex-col justify-center gap-4 py-8 md:flex-row md:py-12">
+	<section class="flex w-full flex-col justify-center gap-4 py-8 md:flex-row md:py-12">
 		{#if isLoading}
 			<SvgSpinnersBarsRotateFade
 				className="size-10 text-zinc-500 absolute left-1/2 top-1/2 -translate-1/2"
@@ -49,8 +49,8 @@
 				{@render pseudoMasonry(1)}
 			{/if}
 		{/if}
-	</div>
-</section>
+	</section>
+</main>
 
 {#snippet designItemComponent(Item: Component)}
 	<div

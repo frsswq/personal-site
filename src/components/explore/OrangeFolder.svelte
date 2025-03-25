@@ -6,7 +6,8 @@
 	<div class="bottom-tab bg-amber-200"></div>
 	<div class="box bg-gradient-to-b from-amber-300 to-amber-400"></div>
 	<p
-		class="folder-text pb-2.5 pl-3 text-xl leading-none font-semibold tracking-tight text-yellow-600 md:pb-4 md:pl-4.5 md:text-3xl"
+		class="folder-text pb-2.5 pl-3 text-xl leading-none font-semibold tracking-tight text-yellow-600 md:pb-4
+			md:pl-4.5 md:text-3xl"
 	>
 		Archive
 	</p>
@@ -15,12 +16,13 @@
 <div
 	popover
 	id="info"
-	class="size-fit rounded-lg border border-zinc-200 bg-zinc-50/80 py-1.5 pr-2 pl-2.5 text-center text-xs leading-none tracking-tight text-black tabular-nums md:text-sm"
+	class="size-fit rounded-lg border border-zinc-200 bg-zinc-50/80 py-1.5 pr-2 pl-2.5 text-center text-xs
+		leading-none tracking-tight text-black tabular-nums md:text-sm"
 >
 	Last Modified:
 	<span
-		class="ml-0.5 inline-block rounded-md border border-zinc-200/80 bg-white px-1.5 py-1 leading-none font-medium tracking-tighter"
-		>18/03/2025</span
+		class="ml-0.5 inline-block rounded-md border border-zinc-200/80 bg-white px-1.5 py-1 leading-none
+			font-medium tracking-tighter">18/03/2025</span
 	>
 </div>
 
@@ -78,23 +80,29 @@
 		anchor-name: --top-parent;
 	}
 
-	#info {
-		position: absolute;
-		inset: unset;
-		top: anchor(bottom);
-		left: anchor(center);
-		position-anchor: --top-parent;
-		position-try-fallbacks: flip-block;
-		margin-block-start: 0.75rem;
-		translate: -50%;
-		animation: scale-out 0.15s forwards;
-
-
-		&:popover-open {
-			animation: scale-in 0.15s forwards;
+	@supports not (position-anchor: --top-parent) {
+		#info {
+			display: none;
 		}
 	}
 
+	@supports (position-anchor: --top-parent) {
+		#info {
+			position: absolute;
+			inset: unset;
+			top: anchor(bottom);
+			left: anchor(center);
+			position-anchor: --top-parent;
+			position-try-fallbacks: flip-block;
+			margin-block-start: 0.75rem;
+			translate: -50%;
+			animation: scale-out 0.15s forwards;
+
+			&:popover-open {
+				animation: scale-in 0.15s forwards;
+			}
+		}
+	}
 
 	.bottom-tab {
 		position: absolute;

@@ -1,28 +1,30 @@
----
-import { cn } from '../../utils/cn';
+<script lang="ts">
+	import { cn } from '../../utils/cn';
+	import { onMount } from 'svelte';
 
-interface Props {
-	href: string;
-	ariaLabel: string;
-	dataText: string;
-}
+	const { href, ariaLabel, dataText, children } = $props();
 
-const currentPath = Astro.url.pathname;
+	let path = $state('');
+	let currentPath = $state(href);
 
-const linkClass: string =
-	'nav-button relative flex items-center justify-center gap-x-2 rounded-md border border-transparent px-2.5 py-2.5 text-sm leading-none tracking-tight text-zinc-500 hover:border-zinc-200/50 hover:bg-zinc-100/80 hover:text-black md:text-base';
-
-const { href, ariaLabel, dataText } = Astro.props;
----
+	onMount(() => {
+		path = window.location.pathname;
+		currentPath = href;
+	});
+</script>
 
 <a
-	href={href}
+	{href}
 	aria-label={ariaLabel}
 	data-text={dataText}
-	class={cn(linkClass, currentPath === href ? 'text-black' : '')}
-	data-astro-prefetch
+	class={cn(
+		`nav-button relative flex items-center justify-center gap-x-2 rounded-md border border-transparent
+		px-2.5 py-2.5 text-sm leading-none tracking-tight text-zinc-500 hover:border-zinc-200/50
+		hover:bg-zinc-100/80 hover:text-black md:text-base`,
+		path === currentPath ? 'text-black' : ''
+	)}
 >
-	<slot />
+	{@render children()}
 </a>
 
 <style>

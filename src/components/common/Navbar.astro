@@ -6,11 +6,12 @@ import BlogIcon from '../icons/HugeiconsQuillWrite01.svelte';
 import NavLink from './NavLink.svelte';
 ---
 
-<nav>
+<nav
+	class="flex items-center justify-center border-t-[1.25px] border-zinc-200 bg-white md:border-b-[1.25px]"
+>
 	<div
-		class="fixed bottom-0 left-0 z-50 flex h-12 w-full items-center justify-center gap-x-0.5 border-t-[1.25px]
-			border-zinc-200 bg-white px-4 leading-none tracking-tighter md:sticky md:top-0 md:h-15
-			md:justify-between md:border-b-[1.25px]"
+		class="fixed bottom-0 left-0 z-50 flex h-12 w-full max-w-[1440px] items-center justify-center px-4
+			leading-none tracking-tighter md:sticky md:top-0 md:h-15 md:justify-between"
 	>
 		<div class="hidden w-full md:flex">
 			<NavClock client:load />

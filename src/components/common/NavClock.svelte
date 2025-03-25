@@ -1,36 +1,53 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { quintIn, quintOut } from 'svelte/easing';
+	import { fly } from 'svelte/transition';
 
 	let time = $state(new Date());
 
 	let hours = $derived(time.getHours().toString().padStart(2, '0'));
 	let minutes = $derived(time.getMinutes().toString().padStart(2, '0'));
+	let seconds = $derived(time.getSeconds().toString().padStart(2, '0'));
 
 	onMount(() => {
 		const interval = setInterval(() => {
 			time = new Date();
 		}, 1000);
 
-		return () => {
-			clearInterval(interval);
-		};
+		return () => clearInterval(interval);
 	});
 
 	const numClass =
-		'flex items-center justify-center px-1.5 py-1 rounded-md border border-zinc-200 bg-white min-w-[35px]';
+		'numberContainer flex overflow-hidden items-center justify-center px-3 py-1.5 rounded-md border border-zinc-200 bg-white min-w-[35px] min-h-[30px]';
 </script>
 
 <div
-	class="clock hidden w-fit items-center justify-center gap-x-0.5 rounded-lg border border-zinc-200
-		bg-zinc-50/60 p-0.5 leading-none font-semibold text-zinc-800 select-none md:flex"
+	class="clock hidden w-fit items-center justify-center gap-x-1 rounded-lg border border-zinc-200
+		bg-zinc-50/60 p-1 leading-none font-semibold text-zinc-800 select-none md:flex"
 >
-	<span class={numClass}>{hours}</span>
-	<span class={numClass}>{minutes}</span>
+	{@render counterAnim(hours[0])}
+	{@render counterAnim(hours[1])}:
+	{@render counterAnim(minutes[0])}
+	{@render counterAnim(minutes[1])}
 </div>
+
+{#snippet counterAnim(time: string)}
+	<div class={numClass}>
+		{#key time}
+			<span class="absolute" in:fly={{ y: 50, opacity: 0 }} out:fly={{ y: -50, opacity: 0 }}>
+				{time}
+			</span>
+		{/key}
+	</div>
+{/snippet}
 
 <style>
 	.clock {
 		font-family: 'Inter', sans-serif;
 		font-feature-settings: 'ss01';
+	}
+
+	.numberContainer {
+		contain: paint;
 	}
 </style>

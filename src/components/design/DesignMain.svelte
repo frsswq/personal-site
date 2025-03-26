@@ -7,9 +7,10 @@
 	import WhiteKeycaps from './WhiteKeycaps.svelte';
 	import WhiteMenu from './WhiteMenu.svelte';
 	import WhiteSwitch from './WhiteSwitch.svelte';
+	import Clock from './Clock.svelte';
 	import SvgSpinnersBarsRotateFade from '../icons/SvgSpinnersBarsRotateFade.svelte';
 
-	const designItems: Component[] = [WhiteKeycaps, WhiteMenu, FolderSection, WhiteSwitch];
+	const designItems: Component[] = [WhiteKeycaps, WhiteMenu, FolderSection, WhiteSwitch, Clock];
 	const designItemContainerClass: string =
 		'flex h-fit w-full items-center justify-center gap-2.5 bg-white md:w-fit md:flex-col md:gap-4';
 

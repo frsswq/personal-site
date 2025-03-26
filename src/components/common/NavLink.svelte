@@ -2,29 +2,41 @@
 	import { cn } from '../../utils/cn';
 	import { onMount } from 'svelte';
 
-	const { href, ariaLabel, dataText, children } = $props();
+	import HomeIcon from '../icons/IconamoonSignDivisionSlashLight.svelte';
+	import DesignIcon from '../icons/IconoirDesignNib.svelte';
+	import BlogIcon from '../icons/HugeiconsQuillWrite01.svelte';
 
-	let path = $state('');
-	let currentPath = $state(href);
+	let currentPath = $state('');
 
 	onMount(() => {
-		path = window.location.pathname;
-		currentPath = href;
+		currentPath = window.location.pathname;
 	});
+
+	const linkClass: string = `nav-button relative flex items-center justify-center gap-x-2 rounded-md border border-transparent
+		px-2.5 py-2.5 text-sm leading-none tracking-tight text-zinc-500 hover:border-zinc-200/50
+		hover:bg-zinc-100/80 hover:text-black md:text-base`;
 </script>
 
 <a
-	{href}
-	aria-label={ariaLabel}
-	data-text={dataText}
-	class={cn(
-		`nav-button relative flex items-center justify-center gap-x-2 rounded-md border border-transparent
-		px-2.5 py-2.5 text-sm leading-none tracking-tight text-zinc-500 hover:border-zinc-200/50
-		hover:bg-zinc-100/80 hover:text-black md:text-base`,
-		path === currentPath ? 'text-black' : ''
-	)}
->
-	{@render children()}
+	href="/"
+	aria-label="Home"
+	data-text="Home"
+	class={cn(linkClass, currentPath === '/' ? 'text-black' : '')}
+	><HomeIcon className="size-6 md:size-5"></HomeIcon>
+</a>
+<a
+	href="/design"
+	aria-label="Design"
+	data-text="Design"
+	class={cn(linkClass, currentPath === '/design' ? 'text-black' : '')}
+	><DesignIcon className="size-6 md:size-5"></DesignIcon>
+</a>
+<a
+	href="/blog"
+	aria-label="Blog"
+	data-text="Blog"
+	class={cn(linkClass, currentPath === '/blog' ? 'text-black' : '')}
+	><BlogIcon className="size-6 md:size-5"></BlogIcon>
 </a>
 
 <style>

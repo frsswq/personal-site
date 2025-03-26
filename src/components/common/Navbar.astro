@@ -1,32 +1,16 @@
 ---
-import NavClock from './NavClock.svelte';
-import HomeIcon from '../icons/IconamoonSignDivisionSlashLight.svelte';
-import DesignIcon from '../icons/IconoirDesignNib.svelte';
-import BlogIcon from '../icons/HugeiconsQuillWrite01.svelte';
 import NavLink from './NavLink.svelte';
 ---
 
-<nav
-	class="flex items-center justify-center border-t-[1.25px] border-zinc-200 bg-white md:border-b-[1.25px]"
->
+<nav>
 	<div
-		class="fixed bottom-0 left-0 z-50 flex h-12 w-full max-w-[1440px] items-center justify-center px-4
-			leading-none tracking-tighter md:sticky md:top-0 md:h-15 md:justify-between"
+		class="fixed bottom-0 left-0 z-50 w-full border-t-[1.25px] border-zinc-200 bg-white md:sticky md:top-0
+			md:border-b-[1.25px]"
 	>
-		<div class="hidden w-full md:flex">
-			<NavClock client:load />
+		<div
+			class="flex h-12 max-w-[1440px] items-center justify-center px-4 leading-none tracking-tighter md:h-15"
+		>
+			<NavLink client:idle />
 		</div>
-		<div class="flex h-12 items-center justify-center">
-			<NavLink href="/" ariaLabel="Home" dataText="Home" client:idle
-				><HomeIcon className="size-6 md:size-5" />
-			</NavLink>
-			<NavLink href="/design" ariaLabel="Design" dataText="Design" client:idle
-				><DesignIcon className="size-6 md:size-5" />
-			</NavLink>
-			<NavLink href="/blog" ariaLabel="Blog" dataText="Blog" client:idle
-				><BlogIcon className="size-6 md:size-5" />
-			</NavLink>
-		</div>
-		<div class="hidden w-full md:flex"></div>
 	</div>
 </nav>

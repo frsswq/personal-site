@@ -1,8 +1,8 @@
 <script lang="ts">
-	import MynauiCopy from '../icons/MynauiCopy.svelte';
-	import MynauiEditOne from '../icons/MynauiEditOne.svelte';
-	import MynauiPin from '../icons/MynauiPin.svelte';
-	import MynauiLinkOne from '../icons/MynauiLinkOne.svelte';
+	import MynauiCopy from '../../icons/MynauiCopy.svelte';
+	import MynauiEditOne from '../../icons/MynauiEditOne.svelte';
+	import MynauiPin from '../../icons/MynauiPin.svelte';
+	import MynauiLinkOne from '../../icons/MynauiLinkOne.svelte';
 
 	const menuItems = [
 		{ label: 'Copy', icon: MynauiCopy },

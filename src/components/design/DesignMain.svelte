@@ -3,10 +3,10 @@
 	import { tick } from 'svelte';
 	import type { Component } from 'svelte';
 
-	import FolderSection from './designs/OrangeFolder.svelte';
-	import WhiteKeycaps from './designs/WhiteKeycaps.svelte';
-	import WhiteMenu from './designs/WhiteMenu.svelte';
-	import CounterClock from './designs/CounterClock.svelte';
+	import FolderSection from './design_item/OrangeFolder.svelte';
+	import WhiteKeycaps from './design_item/WhiteKeycaps.svelte';
+	import WhiteMenu from './design_item/WhiteMenu.svelte';
+	import CounterClock from './design_item/CounterClock.svelte';
 	import SvgSpinnersBarsRotateFade from '../icons/SvgSpinnersBarsRotateFade.svelte';
 
 	const designItems: Component[] = [WhiteKeycaps, WhiteMenu, FolderSection, CounterClock];

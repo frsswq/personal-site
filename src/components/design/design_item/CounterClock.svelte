@@ -1,7 +1,66 @@
 <script lang="ts">
+	import { cubicOut } from 'svelte/easing';
+	import type { TransitionConfig } from 'svelte/transition';
+
+	type flipTypes = {
+		delay?: number;
+		duration?: number;
+		easing?: (t: number) => number;
+	};
+
+	function flipTop(node: HTMLElement, params: flipTypes = {}): TransitionConfig {
+		const { delay = 0, duration = 150, easing = cubicOut } = params;
+
+		return {
+			delay,
+			duration,
+			easing,
+			css: (t: number, u: number) => {
+				const rotation = -90 * u;
+
+				return `
+					z-index: 10;
+					transform: rotateX(${rotation}deg);
+				`;
+			}
+		};
+	}
+
+	function flipBottom(node: HTMLElement, params: flipTypes = {}): TransitionConfig {
+		const { delay = 150, duration = 150, easing = cubicOut } = params;
+
+		return {
+			delay,
+			duration,
+			easing,
+			css: (t: number) => {
+				const rotation = 90 * (1 - t);
+
+				return `
+					z-index: 10;
+					transform: rotateX(${rotation}deg)
+				`;
+			}
+		};
+	}
+
 	class numberCounter {
 		smallNum: number = $state(0);
 		bigNum: number = $state(0);
+
+		get nextSmallNum(): number {
+			if (this.smallNum === 9 && this.bigNum === 9) return 9;
+			return (this.smallNum + 1) % 10;
+		}
+
+		get nextBigNum(): number {
+			if (this.smallNum === 9 && this.bigNum === 9) return 9;
+			if ((this.smallNum + 1) % 10 === 0) {
+				return (this.bigNum + 1) % 10;
+			}
+
+			return this.bigNum;
+		}
 
 		increment(): void {
 			if (this.smallNum === 9 && this.bigNum === 9) return;
@@ -38,34 +97,27 @@
 		bg-gradient-to-b from-gray-400 to-gray-300 p-2 select-none md:max-w-[300px] md:gap-x-2 md:p-4"
 >
 	<div class="container">
-		<div class="card current">
-			<div class="half top"><span>5</span></div>
-			<div class="half bottom"><span>5</span></div>
-		</div>
-		<div class="card next">
-			<div class="half top"><span>{counter.bigNum}</span></div>
-			<div class="half bottom"><span>{counter.bigNum}</span></div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="card current">
-			<div class="half top"><span>5</span></div>
-			<div class="half bottom"><span>5</span></div>
-		</div>
-		<div class="card next">
-			<div class="half top"><span>{counter.smallNum}</span></div>
-			<div class="half bottom"><span>{counter.smallNum}</span></div>
-		</div>
+		{#key counter.smallNum}
+			<div class="card next">
+				<div class="half top"><span>{counter.nextSmallNum}</span></div>
+				<div class="half bottom"><span>{counter.nextSmallNum}</span></div>
+			</div>
+			<div class="card current">
+				<div class="half top"><span>{counter.smallNum}</span></div>
+				<div class="half bottom"><span>{counter.smallNum}</span></div>
+			</div>
+		{/key}
 	</div>
 	<button
 		class="flex items-center rounded-sm bg-zinc-50 px-2 py-1.5 text-xs leading-none font-semibold
 			tracking-tight md:text-sm"
-		onclick={() => counter.increment()}>Plus</button
+		onclick={() => counter.increment()}>+</button
 	>
 </div>
 
 <style>
 	.container {
+		position: relative;
 		height: 8.75rem;
 		width: 6.25rem;
 		perspective: 1000px;
@@ -98,6 +150,7 @@
 		width: 100%;
 		display: flex;
 		justify-content: center;
+		will-change: transform, z-index;
 	}
 
 	.half.top {
@@ -134,15 +187,6 @@
 	.bottom span {
 		transform: translateY(-50%);
 	}
-
-	/* .numberContainer:hover::before {
-		animation: flipTop 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-	}
-
-	.numberContainer:hover::after {
-		animation: flipBottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-		animation-delay: 0.15s;
-	} */
 
 	@keyframes flipTop {
 		0% {

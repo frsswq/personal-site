@@ -15,13 +15,21 @@
 			delay,
 			duration,
 			easing,
-			css: (t: number, u: number) => {
-				const rotation = -90 * u;
+			css: (t: number) => {
+				const rotation = -90 * t;
 
 				return `
-					z-index: 10;
 					transform: rotateX(${rotation}deg);
 				`;
+			},
+			tick: (t) => {
+				if (node.parentElement) {
+					if (t > 0 && t < 1) {
+						node.parentElement.style.zIndex = '10';
+					} else {
+						node.parentElement.style.zIndex = '';
+					}
+				}
 			}
 		};
 	}
@@ -35,11 +43,18 @@
 			easing,
 			css: (t: number) => {
 				const rotation = 90 * (1 - t);
-
 				return `
-					z-index: 10;
 					transform: rotateX(${rotation}deg)
 				`;
+			},
+			tick: (t) => {
+				if (node.parentElement) {
+					if (t > 0 && t < 1) {
+						node.parentElement.style.zIndex = '10';
+					} else {
+						node.parentElement.style.zIndex = '';
+					}
+				}
 			}
 		};
 	}
@@ -110,14 +125,16 @@
 		bg-gradient-to-b from-gray-400 to-gray-300 p-2 select-none md:max-w-[300px] md:gap-x-2 md:p-4"
 >
 	<div class="container">
-		<div class="card current">
-			<div class="half top"><span>{counter.smallNum}</span></div>
-			<div class="half bottom"><span>{counter.smallNum}</span></div>
-		</div>
-		<div class="card next">
-			<div class="half top"><span>{counter.smallNumPlusOne}</span></div>
-			<div class="half bottom"><span>{counter.smallNumPlusOne}</span></div>
-		</div>
+		{#key counter.smallNum}
+			<div class="card current">
+				<div class="half top" in:flipTop><span>{counter.smallNum}</span></div>
+				<div class="half bottom"><span>{counter.smallNum}</span></div>
+			</div>
+			<div class="card next">
+				<div class="half top"><span>{counter.smallNumPlusOne}</span></div>
+				<div class="half bottom" in:flipBottom><span>{counter.smallNumPlusOne}</span></div>
+			</div>
+		{/key}
 	</div>
 	<button
 		class="flex items-center rounded-sm bg-zinc-50 px-2 py-1.5 text-xs leading-none font-semibold

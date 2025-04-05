@@ -47,6 +47,8 @@
 	class numberCounter {
 		smallNum: number = $state(0);
 		bigNum: number = $state(0);
+		smallNumPlusOne: number = $state(1);
+		bigNumPlusOne: number = $state(1);
 
 		get nextSmallNum(): number {
 			if (this.smallNum === 9 && this.bigNum === 9) return 9;
@@ -60,6 +62,12 @@
 			}
 
 			return this.bigNum;
+		}
+
+		async delayNextNum(): Promise<void> {
+			await new Promise((resolve) => setTimeout(resolve, 150));
+			this.smallNumPlusOne = this.nextSmallNum;
+			this.bigNumPlusOne = this.nextBigNum;
 		}
 
 		increment(): void {
@@ -90,6 +98,11 @@
 	}
 
 	const counter = new numberCounter();
+
+	async function handleIncrement() {
+		counter.increment();
+		await counter.delayNextNum();
+	}
 </script>
 
 <div
@@ -97,21 +110,19 @@
 		bg-gradient-to-b from-gray-400 to-gray-300 p-2 select-none md:max-w-[300px] md:gap-x-2 md:p-4"
 >
 	<div class="container">
-		{#key counter.smallNum}
-			<div class="card next">
-				<div class="half top"><span>{counter.nextSmallNum}</span></div>
-				<div class="half bottom"><span>{counter.nextSmallNum}</span></div>
-			</div>
-			<div class="card current">
-				<div class="half top"><span>{counter.smallNum}</span></div>
-				<div class="half bottom"><span>{counter.smallNum}</span></div>
-			</div>
-		{/key}
+		<div class="card current">
+			<div class="half top"><span>{counter.smallNum}</span></div>
+			<div class="half bottom"><span>{counter.smallNum}</span></div>
+		</div>
+		<div class="card next">
+			<div class="half top"><span>{counter.smallNumPlusOne}</span></div>
+			<div class="half bottom"><span>{counter.smallNumPlusOne}</span></div>
+		</div>
 	</div>
 	<button
 		class="flex items-center rounded-sm bg-zinc-50 px-2 py-1.5 text-xs leading-none font-semibold
 			tracking-tight md:text-sm"
-		onclick={() => counter.increment()}>+</button
+		onclick={handleIncrement}>+</button
 	>
 </div>
 
@@ -186,6 +197,19 @@
 
 	.bottom span {
 		transform: translateY(-50%);
+	}
+
+	.card.current {
+		z-index: 2;
+	}
+
+	.card.next {
+		z-index: 1;
+	}
+
+	.container:hover .card.next .half.top {
+		animation: flipTop 0.3s ease forwards;
+		z-index: 10;
 	}
 
 	@keyframes flipTop {

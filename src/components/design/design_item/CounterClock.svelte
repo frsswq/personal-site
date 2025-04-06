@@ -38,7 +38,7 @@
 			duration,
 			easing,
 			css: (t: number) => {
-				const rotation = -90 * t;
+				const rotation = -90 * (1 - t);
 
 				return `
 					transform: rotateX(${rotation}deg);
@@ -46,7 +46,7 @@
 			},
 			tick: (t: number) => {
 				if (node.parentElement) {
-					if (t > 0 && t < 1) {
+					if (t > 0) {
 						node.parentElement.style.zIndex = '10';
 					} else {
 						node.parentElement.style.zIndex = '';
@@ -64,7 +64,7 @@
 			duration,
 			easing,
 			css: (t: number) => {
-				const rotation = 90 * (1 - t);
+				const rotation = 90 * t;
 				return `
 					transform: rotateX(${rotation}deg);
 				`;
@@ -89,14 +89,13 @@
 	<div class="container">
 		{#key currentNum}
 			<div class="card current">
-				<div class="half top" in:flipTopCurrent>
-					<span>{displayCurrentNum}</span>
+				<div class="half top" out:flipTopCurrent>
+					<span>{currentNum}</span>
 				</div>
 				<div class="half bottom"><span>{displayCurrentNum}</span></div>
 			</div>
 			<div class="card next">
-				<div class="half top"><span>{displayNextNum}</span></div>
-				<div class="half bottom" in:flipBottomNext onintroend={() => flipped()}>
+				<div class="half bottom" out:flipBottomNext onoutroend={() => flipped()}>
 					<span>{displayNextNum}</span>
 				</div>
 			</div>

@@ -5,8 +5,8 @@ import NavLink from './NavLink.svelte';
 <nav>
 	<div class="navbar border-t-[1.25px] border-zinc-200 bg-white md:border-b-[1.25px]">
 		<div
-			class="flex h-12 max-w-[1440px] items-center justify-center px-4 leading-none tracking-tighter md:mx-auto
-				md:h-15"
+			class="flex h-15 max-w-[1440px] items-center justify-center gap-x-4 leading-none tracking-tighter
+				md:mx-auto md:gap-x-0"
 		>
 			<NavLink client:idle />
 		</div>
@@ -20,7 +20,7 @@ import NavLink from './NavLink.svelte';
 		right: 0;
 		bottom: 0;
 		width: 100%;
-		height: calc(3rem + env(safe-area-inset-bottom));
+		height: calc(3.75rem + env(safe-area-inset-bottom));
 		padding-bottom: env(safe-area-inset-bottom);
 		z-index: 50;
 

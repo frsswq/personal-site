@@ -1,4 +1,6 @@
 <script lang="ts">
+	// TODO: turn anim into stack, fix the delay numbering
+
 	import { cubicOut } from 'svelte/easing';
 	import type { TransitionConfig } from 'svelte/transition';
 
@@ -8,7 +10,27 @@
 		easing?: (t: number) => number;
 	};
 
-	function flipTop(node: HTMLElement, params: flipTypes = {}): TransitionConfig {
+	let currentNum: number = $state(0);
+	let nextNum: number = $derived((currentNum + 1) % 10);
+	let displayCurrentNum: number = $state(0);
+	let displayNextNum: number = $state(1);
+
+	function increment(): void {
+		if (currentNum === 9 && nextNum === 9) return;
+
+		currentNum = (currentNum + 1) % 10;
+	}
+
+	function flipped(): void {
+		displayCurrentNum = currentNum;
+		displayNextNum = nextNum;
+	}
+
+	function flipTopCurrent(node: HTMLElement, params: flipTypes = {}): TransitionConfig {
+		/*	logic (onclick)
+			- current top flip, show the next top
+			- next bottom flip, hide the current bottom
+		*/
 		const { delay = 0, duration = 150, easing = cubicOut } = params;
 
 		return {
@@ -22,7 +44,7 @@
 					transform: rotateX(${rotation}deg);
 				`;
 			},
-			tick: (t) => {
+			tick: (t: number) => {
 				if (node.parentElement) {
 					if (t > 0 && t < 1) {
 						node.parentElement.style.zIndex = '10';
@@ -34,7 +56,7 @@
 		};
 	}
 
-	function flipBottom(node: HTMLElement, params: flipTypes = {}): TransitionConfig {
+	function flipBottomNext(node: HTMLElement, params: flipTypes = {}): TransitionConfig {
 		const { delay = 150, duration = 150, easing = cubicOut } = params;
 
 		return {
@@ -44,10 +66,10 @@
 			css: (t: number) => {
 				const rotation = 90 * (1 - t);
 				return `
-					transform: rotateX(${rotation}deg)
+					transform: rotateX(${rotation}deg);
 				`;
 			},
-			tick: (t) => {
+			tick: (t: number) => {
 				if (node.parentElement) {
 					if (t > 0 && t < 1) {
 						node.parentElement.style.zIndex = '10';
@@ -58,66 +80,6 @@
 			}
 		};
 	}
-
-	class numberCounter {
-		smallNum: number = $state(0);
-		bigNum: number = $state(0);
-		smallNumPlusOne: number = $state(1);
-		bigNumPlusOne: number = $state(1);
-
-		get nextSmallNum(): number {
-			if (this.smallNum === 9 && this.bigNum === 9) return 9;
-			return (this.smallNum + 1) % 10;
-		}
-
-		get nextBigNum(): number {
-			if (this.smallNum === 9 && this.bigNum === 9) return 9;
-			if ((this.smallNum + 1) % 10 === 0) {
-				return (this.bigNum + 1) % 10;
-			}
-
-			return this.bigNum;
-		}
-
-		async delayNextNum(): Promise<void> {
-			await new Promise((resolve) => setTimeout(resolve, 150));
-			this.smallNumPlusOne = this.nextSmallNum;
-			this.bigNumPlusOne = this.nextBigNum;
-		}
-
-		increment(): void {
-			if (this.smallNum === 9 && this.bigNum === 9) return;
-
-			this.smallNum = (this.smallNum + 1) % 10;
-
-			if (this.smallNum === 0) {
-				this.bigNum = (this.bigNum + 1) % 10;
-			}
-		}
-
-		decrement(): void {
-			if (this.smallNum === 0 && this.bigNum === 0) return;
-
-			if (this.smallNum === 0) {
-				this.smallNum = 9;
-				this.bigNum = (this.bigNum - 1 + 10) % 10;
-			} else {
-				this.smallNum--;
-			}
-		}
-
-		reset(): void {
-			this.smallNum = 0;
-			this.bigNum = 0;
-		}
-	}
-
-	const counter = new numberCounter();
-
-	async function handleIncrement() {
-		counter.increment();
-		await counter.delayNextNum();
-	}
 </script>
 
 <div
@@ -125,21 +87,25 @@
 		bg-gradient-to-b from-gray-400 to-gray-300 p-2 select-none md:max-w-[300px] md:gap-x-2 md:p-4"
 >
 	<div class="container">
-		{#key counter.smallNum}
+		{#key currentNum}
 			<div class="card current">
-				<div class="half top" in:flipTop><span>{counter.smallNum}</span></div>
-				<div class="half bottom"><span>{counter.smallNum}</span></div>
+				<div class="half top" in:flipTopCurrent>
+					<span>{displayCurrentNum}</span>
+				</div>
+				<div class="half bottom"><span>{displayCurrentNum}</span></div>
 			</div>
 			<div class="card next">
-				<div class="half top"><span>{counter.smallNumPlusOne}</span></div>
-				<div class="half bottom" in:flipBottom><span>{counter.smallNumPlusOne}</span></div>
+				<div class="half top"><span>{displayNextNum}</span></div>
+				<div class="half bottom" in:flipBottomNext onintroend={() => flipped()}>
+					<span>{displayNextNum}</span>
+				</div>
 			</div>
 		{/key}
 	</div>
 	<button
 		class="flex items-center rounded-sm bg-zinc-50 px-2 py-1.5 text-xs leading-none font-semibold
 			tracking-tight md:text-sm"
-		onclick={handleIncrement}>+</button
+		onclick={() => increment()}>+</button
 	>
 </div>
 
@@ -222,28 +188,5 @@
 
 	.card.next {
 		z-index: 1;
-	}
-
-	.container:hover .card.next .half.top {
-		animation: flipTop 0.3s ease forwards;
-		z-index: 10;
-	}
-
-	@keyframes flipTop {
-		0% {
-			transform: rotateX(0deg);
-		}
-		100% {
-			transform: rotateX(-90deg);
-		}
-	}
-
-	@keyframes flipBottom {
-		0% {
-			transform: rotateX(90deg);
-		}
-		100% {
-			transform: rotateX(0deg);
-		}
 	}
 </style>

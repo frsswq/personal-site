@@ -6,10 +6,10 @@
 	import FolderSection from './design_item/OrangeFolder.svelte';
 	import WhiteKeycaps from './design_item/WhiteKeycaps.svelte';
 	import WhiteMenu from './design_item/WhiteMenu.svelte';
-	import CounterClock from './design_item/CounterClock.svelte';
+	import FlipCounter from './design_item/FlipCounter.svelte';
 	import SvgSpinnersBarsRotateFade from '../icons/SvgSpinnersBarsRotateFade.svelte';
 
-	const designItems: Component[] = [WhiteKeycaps, WhiteMenu, FolderSection, CounterClock];
+	const designItems: Component[] = [WhiteKeycaps, WhiteMenu, FolderSection, FlipCounter];
 	const designItemContainerClass: string =
 		'flex h-fit w-full items-center justify-center gap-2.5 bg-white md:w-fit md:flex-col md:gap-4';
 

@@ -8,26 +8,26 @@
 		easing?: (t: number) => number;
 	};
 
-	let currentNum: number = $state(0);
-	let nextNum: number = $derived((currentNum + 1) % 10);
-	let displayCurrentNum: number = $state(0);
+	let smallNum: number = $state(0);
+	let displaySmallNum: number = $state(0);
+	let bigNum: number = $state(0);
+	let displayBigNum: number = $state(0);
+	const animDuration: number = 100;
 
 	function increment(): void {
-		if (currentNum === 9 && nextNum === 9) return;
-
-		currentNum = (currentNum + 1) % 10;
+		smallNum = (smallNum + 1) % 10;
+		if (smallNum === 0) {
+			bigNum = (bigNum + 1) % 10;
+		}
 	}
 
-	function flipped(): void {
-		displayCurrentNum = currentNum;
-	}
+	/*	logic (onclick)
+		- current top flip, show the next top
+		- next bottom flip, hide the current bottom
+	*/
 
 	function flipTopCurrent(node: HTMLElement, params: flipTypes = {}): TransitionConfig {
-		/*	logic (onclick)
-			- current top flip, show the next top
-			- next bottom flip, hide the current bottom
-		*/
-		const { delay = 0, duration = 100, easing = cubicOut } = params;
+		const { delay = 0, duration = animDuration, easing = cubicOut } = params;
 
 		return {
 			delay,
@@ -53,7 +53,7 @@
 	}
 
 	function flipBottomNext(node: HTMLElement, params: flipTypes = {}): TransitionConfig {
-		const { delay = 100, duration = 100, easing = cubicOut } = params;
+		const { delay = animDuration, duration = animDuration, easing = cubicOut } = params;
 
 		return {
 			delay,
@@ -68,7 +68,10 @@
 			tick: (t: number) => {
 				if (node.parentElement) {
 					if (t === 1) {
-						displayCurrentNum = currentNum;
+						displaySmallNum = (displaySmallNum + 1) % 10;
+						if (displaySmallNum === 0) {
+							displayBigNum = (displayBigNum + 1) % 10;
+						}
 					} else if (t < 1) {
 						node.parentElement.style.zIndex = '10';
 					} else {
@@ -85,18 +88,35 @@
 		bg-gradient-to-b from-gray-400 to-gray-300 p-2 select-none md:max-w-[300px] md:gap-x-2 md:p-4"
 >
 	<div class="container">
-		{#key currentNum}
+		{#key bigNum}
 			<div class="card current">
 				<div class="half top" out:flipTopCurrent>
-					<span>{currentNum}</span>
+					<span>{bigNum}</span>
 				</div>
 				<div class="half bottom">
-					<span>{displayCurrentNum}</span>
+					<span>{displayBigNum}</span>
 				</div>
 			</div>
 			<div class="card next">
 				<div class="half bottom" in:flipBottomNext>
-					<span>{currentNum}</span>
+					<span>{bigNum}</span>
+				</div>
+			</div>
+		{/key}
+	</div>
+	<div class="container">
+		{#key smallNum}
+			<div class="card current">
+				<div class="half top" out:flipTopCurrent>
+					<span>{smallNum}</span>
+				</div>
+				<div class="half bottom">
+					<span>{displaySmallNum}</span>
+				</div>
+			</div>
+			<div class="card next">
+				<div class="half bottom" in:flipBottomNext>
+					<span>{smallNum}</span>
 				</div>
 			</div>
 		{/key}

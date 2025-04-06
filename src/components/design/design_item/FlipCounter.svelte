@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cubicOut } from 'svelte/easing';
+	import { cubicIn, cubicOut } from 'svelte/easing';
 	import type { TransitionConfig } from 'svelte/transition';
 
 	type flipTypes = {
@@ -12,22 +12,23 @@
 	let bigNum: number = $state(0);
 	let delayedSmallNum: number = $state(0);
 	let delayedBigNum: number = $state(0);
+	let isAnimating: boolean = $state(false);
 
-	let smallNumQueue: number[] = $state([]);
-
-	const animDuration: number = 100;
+	const animDuration: number = 150;
 
 	function increment(): void {
+		if (isAnimating) return;
+
+		isAnimating = true;
+
 		smallNum = (smallNum + 1) % 10;
 		if (smallNum === 0) {
 			bigNum = (bigNum + 1) % 10;
 		}
-
-		smallNumQueue = [...smallNumQueue, smallNum];
 	}
 
 	function flipTopCurrent(node: HTMLElement, params: flipTypes = {}): TransitionConfig {
-		const { delay = 0, duration = animDuration, easing = cubicOut } = params;
+		const { delay = 0, duration = animDuration, easing = cubicIn } = params;
 
 		return {
 			delay,
@@ -68,12 +69,11 @@
 			tick: (t: number) => {
 				if (node.parentElement) {
 					if (t === 1) {
-						if (smallNumQueue.length > 0) {
-							delayedSmallNum = smallNumQueue.shift()!;
-						}
-						if (delayedSmallNum === 0) {
-							delayedBigNum = (delayedBigNum + 1) % 10;
-						}
+						delayedSmallNum = smallNum;
+						delayedBigNum = bigNum;
+						requestAnimationFrame(() => {
+							isAnimating = false;
+						});
 					} else if (t < 1) {
 						node.parentElement.style.zIndex = '10';
 					} else {

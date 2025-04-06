@@ -9,9 +9,12 @@
 	};
 
 	let smallNum: number = $state(0);
-	let displaySmallNum: number = $state(0);
 	let bigNum: number = $state(0);
-	let displayBigNum: number = $state(0);
+	let delayedSmallNum: number = $state(0);
+	let delayedBigNum: number = $state(0);
+
+	let smallNumQueue: number[] = $state([]);
+
 	const animDuration: number = 100;
 
 	function increment(): void {
@@ -19,12 +22,9 @@
 		if (smallNum === 0) {
 			bigNum = (bigNum + 1) % 10;
 		}
-	}
 
-	/*	logic (onclick)
-		- current top flip, show the next top
-		- next bottom flip, hide the current bottom
-	*/
+		smallNumQueue = [...smallNumQueue, smallNum];
+	}
 
 	function flipTopCurrent(node: HTMLElement, params: flipTypes = {}): TransitionConfig {
 		const { delay = 0, duration = animDuration, easing = cubicOut } = params;
@@ -68,9 +68,11 @@
 			tick: (t: number) => {
 				if (node.parentElement) {
 					if (t === 1) {
-						displaySmallNum = (displaySmallNum + 1) % 10;
-						if (displaySmallNum === 0) {
-							displayBigNum = (displayBigNum + 1) % 10;
+						if (smallNumQueue.length > 0) {
+							delayedSmallNum = smallNumQueue.shift()!;
+						}
+						if (delayedSmallNum === 0) {
+							delayedBigNum = (delayedBigNum + 1) % 10;
 						}
 					} else if (t < 1) {
 						node.parentElement.style.zIndex = '10';
@@ -94,7 +96,7 @@
 					<span>{bigNum}</span>
 				</div>
 				<div class="half bottom">
-					<span>{displayBigNum}</span>
+					<span>{delayedBigNum}</span>
 				</div>
 			</div>
 			<div class="card next">
@@ -111,7 +113,7 @@
 					<span>{smallNum}</span>
 				</div>
 				<div class="half bottom">
-					<span>{displaySmallNum}</span>
+					<span>{delayedSmallNum}</span>
 				</div>
 			</div>
 			<div class="card next">

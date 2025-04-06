@@ -22,21 +22,21 @@
 	aria-label="Home"
 	data-text="Home"
 	class={cn(linkClass, currentPath === '/' ? 'text-black' : '')}
-	><HomeIcon className="size-7 md:size-5"></HomeIcon>
+	><HomeIcon className="size-6 md:size-5"></HomeIcon>
 </a>
 <a
 	href="/design"
 	aria-label="Design"
 	data-text="Design"
 	class={cn(linkClass, currentPath === '/design' ? 'text-black' : '')}
-	><DesignIcon className="size-7 md:size-5"></DesignIcon>
+	><DesignIcon className="size-6 md:size-5"></DesignIcon>
 </a>
 <a
 	href="/blog"
 	aria-label="Blog"
 	data-text="Blog"
 	class={cn(linkClass, currentPath === '/blog' ? 'text-black' : '')}
-	><BlogIcon className="size-7 md:size-5"></BlogIcon>
+	><BlogIcon className="size-6 md:size-5"></BlogIcon>
 </a>
 
 <style>

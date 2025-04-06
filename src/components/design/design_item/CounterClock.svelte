@@ -23,7 +23,6 @@
 
 	function flipped(): void {
 		displayCurrentNum = currentNum;
-		displayNextNum = nextNum;
 	}
 
 	function flipTopCurrent(node: HTMLElement, params: flipTypes = {}): TransitionConfig {
@@ -31,7 +30,7 @@
 			- current top flip, show the next top
 			- next bottom flip, hide the current bottom
 		*/
-		const { delay = 0, duration = 150, easing = cubicOut } = params;
+		const { delay = 0, duration = 100, easing = cubicOut } = params;
 
 		return {
 			delay,
@@ -57,21 +56,23 @@
 	}
 
 	function flipBottomNext(node: HTMLElement, params: flipTypes = {}): TransitionConfig {
-		const { delay = 150, duration = 150, easing = cubicOut } = params;
+		const { delay = 100, duration = 100, easing = cubicOut } = params;
 
 		return {
 			delay,
 			duration,
 			easing,
 			css: (t: number) => {
-				const rotation = 90 * t;
+				const rotation = 90 * (1 - t);
 				return `
 					transform: rotateX(${rotation}deg);
 				`;
 			},
 			tick: (t: number) => {
 				if (node.parentElement) {
-					if (t > 0 && t < 1) {
+					if (t === 1) {
+						displayCurrentNum = currentNum;
+					} else if (t < 1) {
 						node.parentElement.style.zIndex = '10';
 					} else {
 						node.parentElement.style.zIndex = '';
@@ -83,7 +84,7 @@
 </script>
 
 <div
-	class="flex max-w-[250px] items-center justify-center gap-x-1 rounded-xl border-2 border-zinc-200
+	class="ju/stify-center flex max-w-[250px] items-center gap-x-1 rounded-xl border-2 border-zinc-200
 		bg-gradient-to-b from-gray-400 to-gray-300 p-2 select-none md:max-w-[300px] md:gap-x-2 md:p-4"
 >
 	<div class="container">
@@ -92,11 +93,13 @@
 				<div class="half top" out:flipTopCurrent>
 					<span>{currentNum}</span>
 				</div>
-				<div class="half bottom"><span>{displayCurrentNum}</span></div>
+				<div class="half bottom">
+					<span>{displayCurrentNum}</span>
+				</div>
 			</div>
 			<div class="card next">
-				<div class="half bottom" out:flipBottomNext onoutroend={() => flipped()}>
-					<span>{displayNextNum}</span>
+				<div class="half bottom" in:flipBottomNext>
+					<span>{currentNum}</span>
 				</div>
 			</div>
 		{/key}

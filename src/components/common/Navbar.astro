@@ -3,10 +3,7 @@ import NavLink from './NavLink.svelte';
 ---
 
 <nav>
-	<div
-		class="h-[calc(48px + env(safe-area-inset-bottom))] fixed right-0 bottom-0 left-0 z-50 w-full
-			border-t-[1.25px] border-zinc-200 bg-white md:sticky md:top-0 md:h-15 md:border-b-[1.25px]"
-	>
+	<div class="navbar border-t-[1.25px] border-zinc-200 bg-white md:border-b-[1.25px]">
 		<div
 			class="flex h-12 max-w-[1440px] items-center justify-center px-4 leading-none tracking-tighter md:mx-auto
 				md:h-15"
@@ -15,3 +12,22 @@ import NavLink from './NavLink.svelte';
 		</div>
 	</div>
 </nav>
+
+<style>
+	.navbar {
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		height: calc(3rem + env(safe-area-inset-bottom));
+		padding-bottom: env(safe-area-inset-bottom);
+		z-index: 50;
+
+		@media (min-width: 48rem) {
+			position: sticky;
+			top: 0;
+			height: 3.75rem;
+		}
+	}
+</style>

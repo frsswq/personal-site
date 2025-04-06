@@ -1,6 +1,4 @@
 <script lang="ts">
-	// TODO: turn anim into stack, fix the delay numbering
-
 	import { cubicOut } from 'svelte/easing';
 	import type { TransitionConfig } from 'svelte/transition';
 
@@ -13,7 +11,6 @@
 	let currentNum: number = $state(0);
 	let nextNum: number = $derived((currentNum + 1) % 10);
 	let displayCurrentNum: number = $state(0);
-	let displayNextNum: number = $state(1);
 
 	function increment(): void {
 		if (currentNum === 9 && nextNum === 9) return;

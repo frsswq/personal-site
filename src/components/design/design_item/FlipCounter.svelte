@@ -38,14 +38,13 @@
 			easing,
 			css: (t: number) => {
 				const rotation = -90 * (1 - t);
-				const toGray = t > 0.8 ? 'white' : t > 0.6 ? 'zinc-200' : 'zinc-300';
 
 				return `
 					background: linear-gradient(
 						to top,
-						color-mix(in oklab, var(--color-zinc-300) ${Math.min(200 * (1 - t), 100)}%, var(--color-zinc-200)),
-						color-mix(in oklab, var(--color-zinc-300) ${Math.min(Math.max(200 * (1 - t), 12.5), 100)}%, var(--color-white)),
-						color-mix(in oklab, var(--color-zinc-300) ${Math.min(200 * (1 - t), 100)}%, var(--color-white))
+						color-mix(in oklab, var(--color-zinc-300) ${100 * Math.min(2 * (1 - t), 1)}%, var(--color-zinc-200)),
+						color-mix(in oklab, var(--color-zinc-300) ${100 * Math.min(Math.max(2 * (1 - t), 0.125), 1)}%, var(--color-white)),
+						color-mix(in oklab, var(--color-zinc-300) ${100 * Math.min(2 * (1 - t), 1)}%, var(--color-white))
 					);
 
 					transform: rotateX(${rotation}deg);

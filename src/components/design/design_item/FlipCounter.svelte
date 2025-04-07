@@ -43,9 +43,9 @@
 				return `
 					background: linear-gradient(
 						to top,
-						var(--color-zinc-${t > 0.6 ? '200' : '300'}) 0%,
-						var(--color-${toGray}) 25%,
-						var(--color-${toGray}) 100%
+						color-mix(in oklab, var(--color-zinc-300) ${Math.min(200 * (1 - t), 100)}%, var(--color-zinc-200)),
+						color-mix(in oklab, var(--color-zinc-300) ${Math.min(Math.max(200 * (1 - t), 12.5), 100)}%, var(--color-white)),
+						color-mix(in oklab, var(--color-zinc-300) ${Math.min(200 * (1 - t), 100)}%, var(--color-white))
 					);
 
 					transform: rotateX(${rotation}deg);

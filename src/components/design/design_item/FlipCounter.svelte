@@ -1,4 +1,6 @@
 <script lang="ts">
+	// TODO: proper styling
+
 	import { cubicIn, cubicOut } from 'svelte/easing';
 	import type { TransitionConfig } from 'svelte/transition';
 
@@ -35,9 +37,21 @@
 			duration,
 			easing,
 			css: (t: number) => {
+				// (1 - t) = mulai dari 0
+				// -90 * (1 - t) = 0 -> -90
+				// background: color-mix(in oklab, var(--color-zinc-400) ${100 * (1 - t)}%, var(--color-white));
+
 				const rotation = -90 * (1 - t);
+				const toGray = t > 0.8 ? 'white' : t > 0.6 ? 'zinc-200' : 'zinc-300';
 
 				return `
+					background: linear-gradient(
+						to top,
+						var(--color-zinc-${t > 0.6 ? '200' : '300'}) 0%,
+						var(--color-${toGray}) 25%,
+						var(--color-${toGray}) 100%
+					);
+
 					transform: rotateX(${rotation}deg);
 				`;
 			},
@@ -85,61 +99,76 @@
 	}
 </script>
 
-<div
-	class="ju/stify-center flex max-w-[250px] items-center gap-x-1 rounded-xl border-2 border-zinc-200
-		bg-gradient-to-b from-gray-400 to-gray-300 p-2 select-none md:max-w-[300px] md:gap-x-2 md:p-4"
->
-	<div class="container">
-		{#key bigNum}
-			<div class="card current">
-				<div class="half top" out:flipTopCurrent>
-					<span>{bigNum}</span>
+<div class="flex items-center justify-center gap-x-2">
+	<div
+		class="main-container gap-x-1 rounded-[1.25rem] border-3 border-zinc-200 bg-black px-1 py-1.25 select-none"
+	>
+		<div class="counter-container">
+			{#key bigNum}
+				<div class="card current">
+					<div class="half top" out:flipTopCurrent>
+						<span>{bigNum}</span>
+					</div>
+					<div class="half bottom">
+						<span>{delayedBigNum}</span>
+					</div>
 				</div>
-				<div class="half bottom">
-					<span>{delayedBigNum}</span>
+				<div class="card next">
+					<div class="half bottom" in:flipBottomNext>
+						<span>{bigNum}</span>
+					</div>
 				</div>
-			</div>
-			<div class="card next">
-				<div class="half bottom" in:flipBottomNext>
-					<span>{bigNum}</span>
+			{/key}
+		</div>
+		<div class="counter-container">
+			{#key smallNum}
+				<div class="card current">
+					<div class="half top" out:flipTopCurrent>
+						<span>{smallNum}</span>
+					</div>
+					<div class="half bottom">
+						<span>{delayedSmallNum}</span>
+					</div>
 				</div>
-			</div>
-		{/key}
-	</div>
-	<div class="container">
-		{#key smallNum}
-			<div class="card current">
-				<div class="half top" out:flipTopCurrent>
-					<span>{smallNum}</span>
+				<div class="card next">
+					<div class="half bottom" in:flipBottomNext>
+						<span>{smallNum}</span>
+					</div>
 				</div>
-				<div class="half bottom">
-					<span>{delayedSmallNum}</span>
-				</div>
-			</div>
-			<div class="card next">
-				<div class="half bottom" in:flipBottomNext>
-					<span>{smallNum}</span>
-				</div>
-			</div>
-		{/key}
+			{/key}
+		</div>
 	</div>
 	<button
-		class="flex items-center rounded-sm bg-zinc-50 px-2 py-1.5 text-xs leading-none font-semibold
-			tracking-tight md:text-sm"
+		class="flex size-5 items-center justify-center rounded-sm bg-zinc-300 px-2 py-1.5 text-xs leading-none
+			font-semibold tracking-tight md:text-sm"
 		onclick={() => increment()}>+</button
 	>
 </div>
 
 <style>
-	.container {
+	.main-container {
+		--counter-size-mobile: 15.625rem;
+		--counter-size: 18.75rem;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		max-width: var(--counter-size);
+
+		@media (width <= 48rem) {
+			max-width: var(--counter-size-mobile);
+		}
+	}
+
+	.counter-container {
 		position: relative;
 		height: 8.75rem;
 		width: 6.25rem;
-		perspective: 1000px;
+		perspective: 500px;
 		font-size: 6.5rem;
 		font-weight: 500;
 		line-height: 1;
-		color: white;
+		color: var(--color-black);
 		font-family: 'Inter Display', sans-serif;
 
 		@media (width <= 48rem) {
@@ -166,26 +195,37 @@
 		display: flex;
 		justify-content: center;
 		will-change: transform, z-index;
+		box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.025);
 	}
 
 	.half.top {
 		top: 0;
-		border: 0.09375rem solid var(--color-zinc-50);
-		border-bottom: 0.0625rem solid var(--color-zinc-50);
-		background: linear-gradient(var(--color-zinc-900), var(--color-zinc-800));
+		background: linear-gradient(
+			to top,
+			var(--color-zinc-200) 0%,
+			var(--color-zinc-100) 12.5%,
+			var(--color-zinc-50) 25%,
+			var(--color-white) 100%
+		);
+		transform: translateY(-0.75px);
 		transform-origin: bottom;
-		border-radius: 0.375rem 0.375rem 0 0;
+		border-radius: 0.875rem 0.875rem 0 0;
 		align-items: flex-end;
 		overflow: hidden;
 	}
 
 	.half.bottom {
 		bottom: 0;
-		border: 0.09375rem solid var(--color-zinc-50);
-		border-top: 0.0625rem solid var(--color-zinc-50);
-		background: linear-gradient(var(--color-zinc-800), var(--color-zinc-600));
+		background: linear-gradient(
+			to bottom,
+			var(--color-zinc-200) 0%,
+			var(--color-zinc-100) 12.5%,
+			var(--color-zinc-50) 25%,
+			var(--color-white) 100%
+		);
+		transform: translateY(0.75px);
 		transform-origin: top;
-		border-radius: 0 0 0.375rem 0.375rem;
+		border-radius: 0 0 0.875rem 0.875rem;
 		align-items: flex-start;
 		overflow: hidden;
 	}
@@ -201,13 +241,5 @@
 
 	.bottom span {
 		transform: translateY(-50%);
-	}
-
-	.card.current {
-		z-index: 2;
-	}
-
-	.card.next {
-		z-index: 1;
 	}
 </style>

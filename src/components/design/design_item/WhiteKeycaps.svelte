@@ -24,7 +24,7 @@
 <style>
 	:root {
 		--button-size: 6.25rem;
-		--butotn-size-small: 4.6875rem;
+		--button-size-mobile: 4.6875rem;
 		--gray-50: rgb(250, 250, 250);
 		--gray-100: rgb(245, 245, 245);
 		--gray-150: rgb(242, 242, 242);
@@ -113,11 +113,32 @@
 		transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 
 		@media (width < 48rem) {
-			width: var(--butotn-size-small);
-			height: var(--butotn-size-small);
+			width: var(--button-size-mobile);
+			height: var(--button-size-mobile);
 			padding: 0.5625rem;
 			border-radius: 0.5625rem;
 			box-shadow: 0 0 0 0.375px rgba(0, 0, 0, 0.1);
+		}
+	}
+
+	.button::before {
+		content: '';
+		position: absolute;
+		top: calc(var(--button-size) * 0.1125);
+		left: calc(var(--button-size) * 0.1125);
+		height: calc(var(--button-size) * 0.775);
+		width: calc(var(--button-size) * 0.775);
+		background: var(--gray-100);
+		border-radius: 0.5rem;
+		box-shadow: 0 0 0 0.75px rgba(255, 255, 255, 0.8);
+		transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+		@media (width < 48rem) {
+			top: calc(var(--button-size-mobile) * 0.1125);
+			left: calc(var(--button-size-mobile) * 0.1125);
+			height: calc(var(--button-size-mobile) * 0.775);
+			width: calc(var(--button-size-mobile) * 0.775);
+			box-shadow: 0 0 0 0.5625px rgba(255, 255, 255, 0.8);
 		}
 	}
 
@@ -139,26 +160,6 @@
 		);
 	}
 
-	.button::before {
-		content: '';
-		position: absolute;
-		top: calc(var(--button-size) * 0.1125);
-		left: calc(var(--button-size) * 0.1125);
-		height: calc(var(--button-size) * 0.775);
-		width: calc(var(--button-size) * 0.775);
-		background: var(--gray-100);
-		border-radius: 0.5rem;
-		box-shadow: 0 0 0 0.75px rgba(255, 255, 255, 0.8);
-		transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-
-		@media (width < 48rem) {
-			top: calc(var(--butotn-size-small) * 0.1125);
-			left: calc(var(--butotn-size-small) * 0.1125);
-			height: calc(var(--butotn-size-small) * 0.775);
-			width: calc(var(--butotn-size-small) * 0.775);
-			box-shadow: 0 0 0 0.5625px rgba(255, 255, 255, 0.8);
-		}
-	}
 
 	.button:hover::before {
 		background: var(--gray-200);
@@ -210,10 +211,10 @@
 		box-shadow: 0 0 0 0.75px rgba(255, 255, 255, 0.5);
 
 		@media (width < 48rem) {
-			top: calc(var(--butotn-size-small) * 0.09375);
-			left: calc(var(--butotn-size-small) * 0.09375);
-			height: calc(var(--butotn-size-small) * 0.8125);
-			width: calc(var(--butotn-size-small) * 0.8125);
+			top: calc(var(--button-size-mobile) * 0.09375);
+			left: calc(var(--button-size-mobile) * 0.09375);
+			height: calc(var(--button-size-mobile) * 0.8125);
+			width: calc(var(--button-size-mobile) * 0.8125);
 			box-shadow: 0 0 0 0.5625px rgba(255, 255, 255, 0.5);
 		}
 	}

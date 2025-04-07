@@ -37,10 +37,6 @@
 			duration,
 			easing,
 			css: (t: number) => {
-				// (1 - t) = mulai dari 0
-				// -90 * (1 - t) = 0 -> -90
-				// background: color-mix(in oklab, var(--color-zinc-400) ${100 * (1 - t)}%, var(--color-white));
-
 				const rotation = -90 * (1 - t);
 				const toGray = t > 0.8 ? 'white' : t > 0.6 ? 'zinc-200' : 'zinc-300';
 

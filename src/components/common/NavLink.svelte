@@ -5,6 +5,7 @@
 	import HomeIcon from '../icons/IconamoonSignDivisionSlashLight.svelte';
 	import DesignIcon from '../icons/IconoirDesignNib.svelte';
 	import BlogIcon from '../icons/HugeiconsQuillWrite01.svelte';
+	import GithubIcon from '../icons/IconoirGithub.svelte';
 
 	let currentPath = $state('');
 
@@ -37,6 +38,15 @@
 	data-text="Blog"
 	class={cn(linkClass, currentPath === '/blog' ? 'text-black' : '')}
 	><BlogIcon className="size-6 md:size-5"></BlogIcon>
+</a>
+<a
+	href="https://github.com/frsswq"
+	aria-label="Github"
+	data-text="Github"
+	target="_blank"
+	class={linkClass}
+>
+	<GithubIcon className="size-6 md:size-5"></GithubIcon>
 </a>
 
 <style>

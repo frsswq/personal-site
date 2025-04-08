@@ -3,6 +3,8 @@
 
 	import { cubicIn, cubicOut } from 'svelte/easing';
 	import type { TransitionConfig } from 'svelte/transition';
+	import CaretUp from '../../icons/BasilCaretUpSolid.svelte';
+	import CaretDown from '../../icons/BasilCaretDownSolid.svelte';
 
 	type flipTypes = {
 		delay?: number;
@@ -26,6 +28,17 @@
 		smallNum = (smallNum + 1) % 10;
 		if (smallNum === 0) {
 			bigNum = (bigNum + 1) % 10;
+		}
+	}
+
+	function decrement(): void {
+		if (isAnimating) return;
+
+		isAnimating = true;
+
+		smallNum = (smallNum - 1 + 10) % 10;
+		if (smallNum === 9) {
+			bigNum = (bigNum - 1 + 10) % 10;
 		}
 	}
 
@@ -133,11 +146,17 @@
 			{/key}
 		</div>
 	</div>
-	<button
-		class="flex size-5 items-center justify-center rounded-sm bg-zinc-300 px-2 py-1.5 text-xs leading-none
-			font-semibold tracking-tight md:text-sm"
-		onclick={() => increment()}>+</button
-	>
+	<div class="flex flex-col rounded-[10px] border border-zinc-200 bg-black">
+		<button
+			class="button-top m-[2.5px] mb-0 flex size-8 items-center justify-center rounded-t-[7px]"
+			onclick={() => increment()}><CaretUp className="text-zinc-800 size-6"></CaretUp></button
+		>
+		<hr class="mx-[2.5px] border-black" />
+		<button
+			class="button-bottom m-[2.5px] mt-0 flex size-8 items-center justify-center rounded-b-[7px]"
+			onclick={() => decrement()}><CaretDown className="text-zinc-800 size-6"></CaretDown></button
+		>
+	</div>
 </div>
 
 <style>
@@ -163,7 +182,7 @@
 		font-size: 6.5rem;
 		font-weight: 500;
 		line-height: 1;
-		color: var(--color-black);
+		color: var(--color-zinc-800);
 		font-family: 'Inter Display', sans-serif;
 
 		@media (width <= 48rem) {
@@ -181,6 +200,26 @@
 		bottom: 0;
 		backface-visibility: hidden;
 		transform-style: preserve-3d;
+	}
+
+	.button-top {
+		background: linear-gradient(
+			to top,
+			var(--color-zinc-200) 0%,
+			var(--color-zinc-100) 5%,
+			var(--color-zinc-50) 10%,
+			var(--color-white) 100%
+		);
+	}
+
+	.button-bottom {
+		background: linear-gradient(
+			to bottom,
+			var(--color-zinc-200) 0%,
+			var(--color-zinc-100) 5%,
+			var(--color-zinc-50) 10%,
+			var(--color-white) 100%
+		);
 	}
 
 	.half {

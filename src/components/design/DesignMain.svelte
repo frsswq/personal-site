@@ -33,7 +33,7 @@
 	<p
 		class="subtitle pt-2 text-center text-base font-medium tracking-tight text-zinc-500 md:pt-2 md:text-2xl"
 	>
-		Form studies with zero depedencies
+		Powered by Svelte and Tailwind CSS
 	</p>
 	<section class="flex w-full flex-col justify-center gap-4 py-8 md:flex-row md:py-12">
 		{#if isLoading}

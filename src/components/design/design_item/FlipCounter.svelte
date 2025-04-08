@@ -1,5 +1,5 @@
 <script lang="ts">
-	// TODO: proper styling
+	// TODO: proper hover and onclick button styling
 
 	import { cubicIn, cubicOut } from 'svelte/easing';
 	import type { TransitionConfig } from 'svelte/transition';

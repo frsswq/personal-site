@@ -148,13 +148,16 @@
 	</div>
 	<div class="flex flex-col rounded-[10px] border border-zinc-200 bg-black">
 		<button
-			class="button-top m-[2.5px] mb-0 flex size-8 items-center justify-center rounded-t-[7px]"
-			onclick={() => increment()}><CaretUp className="text-zinc-800 size-6"></CaretUp></button
+			class="button-top group m-[2.5px] mb-0 flex size-8 items-center justify-center rounded-t-[7px]
+				border-b-[0.75px] border-black"
+			onclick={() => increment()}
+			><CaretUp className="text-zinc-800 size-6 group-hover:text-black"></CaretUp></button
 		>
-		<hr class="mx-[2.5px] border-black" />
 		<button
-			class="button-bottom m-[2.5px] mt-0 flex size-8 items-center justify-center rounded-b-[7px]"
-			onclick={() => decrement()}><CaretDown className="text-zinc-800 size-6"></CaretDown></button
+			class="button-bottom group m-[2.5px] mt-0 flex size-8 items-center justify-center rounded-b-[7px]
+				border-t-[0.75px] border-black"
+			onclick={() => decrement()}
+			><CaretDown className="text-zinc-800 size-6 group-hover:text-black"></CaretDown></button
 		>
 	</div>
 </div>
@@ -206,20 +209,40 @@
 		background: linear-gradient(
 			to top,
 			var(--color-zinc-200) 0%,
-			var(--color-zinc-100) 5%,
-			var(--color-zinc-50) 10%,
+			var(--color-zinc-100) 10%,
+			var(--color-zinc-50) 20%,
 			var(--color-white) 100%
 		);
+
+		&:hover {
+			background: linear-gradient(
+				to top,
+				var(--color-zinc-200) 0%,
+				var(--color-zinc-100) 25%,
+				var(--color-zinc-50) 50%,
+				var(--color-white) 100%
+			);
+		}
 	}
 
 	.button-bottom {
 		background: linear-gradient(
 			to bottom,
 			var(--color-zinc-200) 0%,
-			var(--color-zinc-100) 5%,
-			var(--color-zinc-50) 10%,
+			var(--color-zinc-100) 10%,
+			var(--color-zinc-50) 20%,
 			var(--color-white) 100%
 		);
+
+		&:hover {
+			background: linear-gradient(
+				to bottom,
+				var(--color-zinc-200) 0%,
+				var(--color-zinc-100) 25%,
+				var(--color-zinc-50) 50%,
+				var(--color-white) 100%
+			);
+		}
 	}
 
 	.half {

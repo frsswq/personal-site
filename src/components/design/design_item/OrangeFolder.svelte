@@ -1,4 +1,4 @@
-<button popovertarget="info" class="top-parent cursor-pointer">
+<button popovertarget="info" class="top-parent cursor-pointer select-none">
 	<div class="parent parent-1 z-3">
 		<div class="folder folder-1 bg-amber-200 leading-none tracking-tight"></div>
 	</div>

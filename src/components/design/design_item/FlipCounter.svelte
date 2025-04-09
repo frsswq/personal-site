@@ -107,9 +107,9 @@
 	}
 </script>
 
-<div class="flex items-center justify-center gap-x-2">
+<div class="flex items-center justify-center gap-x-2 select-none">
 	<div
-		class="main-container gap-x-1 rounded-[1.25rem] border-3 border-zinc-200 bg-black px-1 py-1.25 select-none"
+		class="main-container gap-x-1 rounded-[1.25rem] border-3 border-zinc-200 bg-black px-1 py-1.25"
 	>
 		<div class="counter-container">
 			{#key bigNum}
@@ -148,14 +148,14 @@
 	</div>
 	<div class="flex flex-col rounded-[10px] border border-zinc-200 bg-black">
 		<button
-			class="button-top group m-[2.5px] mb-0 flex size-8 items-center justify-center rounded-t-[7px]
-				border-b-[0.75px] border-black"
+			class="button-top group m-[2.5px] mb-0 flex size-8 cursor-pointer items-center justify-center
+				rounded-t-[7px] border-b-[0.75px] border-black"
 			onclick={() => increment()}
 			><CaretUp className="text-zinc-800 size-6 group-hover:text-black"></CaretUp></button
 		>
 		<button
-			class="button-bottom group m-[2.5px] mt-0 flex size-8 items-center justify-center rounded-b-[7px]
-				border-t-[0.75px] border-black"
+			class="button-bottom group m-[2.5px] mt-0 flex size-8 cursor-pointer items-center justify-center
+				rounded-b-[7px] border-t-[0.75px] border-black"
 			onclick={() => decrement()}
 			><CaretDown className="text-zinc-800 size-6 group-hover:text-black"></CaretDown></button
 		>

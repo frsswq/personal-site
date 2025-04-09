@@ -14,7 +14,7 @@
 
 <div
 	class="flex w-[250px] flex-col rounded-xs bg-zinc-200/80 leading-none tracking-tight text-zinc-600
-		md:w-[325px]"
+		select-none md:w-[325px]"
 >
 	{#each menuItems as { label, icon: Icon }, index}
 		<button

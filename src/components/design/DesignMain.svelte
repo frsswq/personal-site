@@ -20,7 +20,7 @@
 	>
 		Powered by Svelte and Tailwind CSS
 	</p>
-	<section class="content mx-auto w-fit columns-1 gap-4 py-8 md:columns-2 md:py-12 lg:columns-3">
+	<section class="mx-auto w-fit columns-1 gap-4 py-8 md:columns-2 md:py-12 xl:columns-3">
 		{#each designItems as Item}
 			<div
 				class="mb-2.5 flex w-[18.75rem] break-inside-avoid items-center justify-center rounded-xl border

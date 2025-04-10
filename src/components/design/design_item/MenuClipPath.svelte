@@ -14,20 +14,21 @@
 		{ Icon: Spotify, text: 'Spotify' }
 	];
 
-	let clipPath: string[] = [
-		'inset(0 68.5% 0 1.75% round 0.4rem)',
-		'inset(0 32.5% 0 32.5% round 0.4rem)',
-		'inset(0 1.75% 0 68.5% round 0.4rem)'
-	];
+	const clipPath: { desktop: string[]; mobile: string[] } = {
+		desktop: [
+			'inset(0 68.5% 0 1.75% round 0.4rem)',
+			'inset(0 32.5% 0 32.5% round 0.4rem)',
+			'inset(0 1.75% 0 68.5% round 0.4rem)'
+		],
+		mobile: [
+			'inset(0 69% 0 1% round 0.4rem)',
+			'inset(0 33% 0 32% round 0.4rem)',
+			'inset(0 1% 0 68% round 0.4rem)'
+		]
+	};
 
-	let clipPathMobile: string[] = [
-		'inset(0 69% 0 1% round 0.4rem)',
-		'inset(0 33% 0 32% round 0.4rem)',
-		'inset(0 1% 0 68% round 0.4rem)'
-	];
-
-	let currentClipPath = $derived(
-		width < 768 ? clipPathMobile[activeButton] : clipPath[activeButton]
+	let currentClipPath: string = $derived(
+		width >= 768 ? clipPath.desktop[activeButton] : clipPath.mobile[activeButton]
 	);
 
 	onMount(() => {
@@ -51,7 +52,7 @@
 >
 	<div class="relative mx-auto flex w-fit items-center justify-center">
 		<div
-			class="absolute z-[1] flex items-center justify-center gap-x-4 bg-orange-400 py-2 pr-3 pl-2 transition-all
+			class="clip-button absolute z-[1] flex items-center justify-center gap-x-4 bg-orange-400 py-2 pr-3 pl-2
 				md:gap-x-6 md:pr-4 md:pl-3"
 			style="clip-path: {currentClipPath};"
 		>
@@ -79,4 +80,8 @@
 </div>
 
 <style>
+	.clip-button {
+		transition: clip-path 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+		will-change: clip-path;
+	}
 </style>

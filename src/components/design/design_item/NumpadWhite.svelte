@@ -9,13 +9,13 @@
 	<div class="{buttonClass} button-container gap-x-0.75 md:gap-x-1">
 		{#each { length: 3 }, i}
 			<button class="button">
-				<p class="button-text">{i + startNum}</p>
+				<p class="button-text select-none">{i + startNum}</p>
 			</button>
 		{/each}
 	</div>
 {/snippet}
 
-<div class="size-fit rounded-[0.9375rem] bg-zinc-200 p-0.75 md:rounded-[1.25rem] md:p-1 select-none">
+<div class="size-fit rounded-[0.9375rem] bg-zinc-200 p-0.75 md:rounded-[1.25rem] md:p-1">
 	{@render WhiteKeycaps({ buttonClass: 'rounded-t-xl md:rounded-t-2xl', startNum: 7 })}
 	{@render WhiteKeycaps({ startNum: 4 })}
 	{@render WhiteKeycaps({ buttonClass: 'rounded-b-xl md:rounded-b-2xl', startNum: 1 })}

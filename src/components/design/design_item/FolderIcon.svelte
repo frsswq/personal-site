@@ -1,4 +1,4 @@
-<button popovertarget="info" class="top-parent cursor-pointer select-none">
+<button popovertarget="info" class="top-parent cursor-pointer">
 	<div class="parent parent-1 z-3">
 		<div class="folder folder-1 bg-amber-200 leading-none tracking-tight"></div>
 	</div>
@@ -6,8 +6,8 @@
 	<div class="bottom-tab bg-amber-200"></div>
 	<div class="box bg-gradient-to-b from-amber-300 to-amber-400"></div>
 	<p
-		class="folder-text pb-2.5 pl-3 text-xl leading-none font-semibold tracking-tight text-yellow-600 md:pb-4
-			md:pl-4.5 md:text-3xl"
+		class="folder-text pb-2.5 pl-3 text-xl leading-none font-semibold tracking-tight text-yellow-600
+			select-none md:pb-4 md:pl-4.5 md:text-3xl"
 	>
 		Archive
 	</p>
@@ -17,7 +17,7 @@
 	popover
 	id="info"
 	class="size-fit rounded-lg border border-zinc-200 bg-zinc-50/80 py-1.5 pr-2 pl-2.5 text-center text-xs
-		leading-none tracking-tight text-black tabular-nums md:text-sm"
+		leading-none tracking-tight text-black tabular-nums select-none md:text-sm"
 >
 	Last Modified:
 	<span

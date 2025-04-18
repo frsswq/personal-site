@@ -2,11 +2,6 @@
 	import { cn } from '@utils/cn';
 	import { onMount, type Component } from 'svelte';
 
-	import HomeIcon from '@icons/IconamoonSignDivisionSlashLight.svelte';
-	import DesignIcon from '@icons/IconoirDesignNib.svelte';
-	import BlogIcon from '@icons/HugeiconsQuillWrite01.svelte';
-	import GithubIcon from '@icons/IconoirGithub.svelte';
-
 	let currentPath = $state('');
 
 	onMount(() => {
@@ -14,10 +9,10 @@
 	});
 </script>
 
-{@render NavLink('/', 'Home', '_self', HomeIcon)}
+<!-- {@render NavLink('/', 'Home', '_self', HomeIcon)}
 {@render NavLink('/design', 'Design', '_self', DesignIcon)}
 {@render NavLink('/blog', 'Blog', '_self', BlogIcon)}
-{@render NavLink('https://github.com/frsswq', 'Github', '_blank', GithubIcon)}
+{@render NavLink('https://github.com/frsswq', 'Github', '_blank', GithubIcon)} -->
 
 {#snippet NavLink(href: string, label: string, target: string = '_self', Icon: Component)}
 	<a

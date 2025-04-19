@@ -1,26 +1,32 @@
 <script lang="ts">
 	import { cn } from '@utils/cn';
 
-	let isClicked: boolean = $state(false);
+	let isOpen: boolean = $state(false);
 </script>
 
-<div class="flex min-h-[275px] min-w-[325px] items-center justify-center bg-transparent">
+<div
+	class="flex min-h-[200px] min-w-[250px] items-center justify-center bg-transparent md:min-h-[275px]
+		md:min-w-[325px]"
+>
 	<button
 		class={cn(
 			`relative flex h-10 w-[125px] origin-center cursor-pointer rounded-[5rem] border border-zinc-200
-			bg-white transition-all duration-300`,
+			bg-white transition-all duration-500`,
 			{
-				'h-[275px] w-[325px] rounded-md': isClicked
+				'h-[200px] w-[250px] rounded-md md:h-[275px] md:w-[325px]': isOpen
 			}
 		)}
-		onclick={() => (isClicked = !isClicked)}
+		onclick={() => (isOpen = !isOpen)}
 	>
 		<span
 			class={cn(
-				`relative m-auto origin-center p-0 text-base font-medium tracking-tight transition-all duration-300
-				ease-in-out`,
+				` absolute top-1/2 left-1/2 -translate-1/2 text-base font-medium tracking-tight transition-all
+				duration-500 ease-in-out`,
 				{
-					'mt-0 ml-0 pt-3 pl-4 text-sm text-zinc-500': isClicked
+					'top-3 left-4 origin-top-left translate-0 text-zinc-400': isOpen
+				},
+				{
+					'origin-center': !isOpen
 				}
 			)}
 		>

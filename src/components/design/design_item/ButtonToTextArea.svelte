@@ -21,8 +21,7 @@
 	<button
 		class={cn(
 			`${quintOut} relative flex h-10 w-[125px] origin-center cursor-pointer rounded-[2rem] border
-			border-zinc-200 bg-white text-sm font-medium tracking-tight transition-all duration-[400ms]
-			md:text-base`,
+			border-zinc-200 bg-white text-sm font-medium tracking-tight transition-all duration-500 md:text-base`,
 			{
 				[`h-[150px] w-[250px] cursor-default rounded-xl inset-ring-4 inset-ring-zinc-100 md:h-[225px]
 				md:w-[325px]`]: isOpen

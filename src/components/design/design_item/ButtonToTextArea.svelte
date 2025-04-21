@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { cn } from '@utils/cn';
-	import { onMouseDownOutside } from '@utils/clickOutside';
+	import { onMouseDownOutside } from '@utils/outside';
 
 	let isOpen: boolean = $state(false);
+	let textArea: string = $state('');
 </script>
 
 <div
@@ -32,7 +33,19 @@
 				}
 			)}
 		>
-			Feedback
+			{textArea ? '' : 'Feedback'}
 		</span>
+		<textarea
+			class="top-3 left-4 h-full w-full resize-none border-none outline-none"
+			required
+			minlength="1"
+			spellcheck="false"
+			bind:value={textArea}
+		></textarea>
 	</button>
+	<p class="absolute bottom-3 text-[10px] text-zinc-700">
+		remake of <a class="hover:text-sky-500" href="https://x.com/emilkowalski_" target="_blank"
+			>@emilkowalski_</a
+		> design
+	</p>
 </div>

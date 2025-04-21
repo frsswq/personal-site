@@ -1,10 +1,5 @@
 ---
 import NavLink from './NavLink.astro';
-
-import HomeIcon from '@icons/MingcuteHome7Line.svg';
-import WorkIcon from '@icons/BytesizePortfolio.svg';
-import DesignIcon from '@icons/IconoirDesignNib.svg';
-import GithubIcon from '@icons/IconoirGithub.svg';
 ---
 
 <nav>
@@ -13,18 +8,7 @@ import GithubIcon from '@icons/IconoirGithub.svg';
 			class="flex h-15 max-w-[1440px] items-center justify-center gap-x-2 leading-none tracking-tighter
 				md:mx-auto md:gap-x-0"
 		>
-			<NavLink href="/" label="Home" target="_self">
-				<HomeIcon class="size-6 md:size-5" />
-			</NavLink>
-			<NavLink href="/work" label="Work" target="_self">
-				<WorkIcon class="size-6 md:size-5" />
-			</NavLink>
-			<NavLink href="/design" label="Design" target="_self">
-				<DesignIcon class="size-6 md:size-5" />
-			</NavLink>
-			<NavLink href="https://github.com/frsswq" label="Github" target="_blank">
-				<GithubIcon class="size-6 md:size-5" />
-			</NavLink>
+			<NavLink />
 		</div>
 	</div>
 </nav>

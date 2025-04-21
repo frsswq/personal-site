@@ -21,10 +21,13 @@
 	<button
 		class={cn(
 			`${quintOut} relative flex h-10 w-[125px] origin-center cursor-pointer rounded-[2rem] border
-			border-zinc-200 bg-white text-sm font-medium tracking-tight transition-all duration-500 md:text-base`,
+			border-zinc-200 bg-white text-sm font-medium tracking-tight transition-all md:text-base`,
 			{
-				[`h-[150px] w-[250px] cursor-default rounded-xl inset-ring-4 inset-ring-zinc-100 md:h-[225px]
-				md:w-[325px]`]: isOpen
+				[`h-[150px] w-[250px] cursor-default rounded-xl inset-ring-4 inset-ring-zinc-100 duration-500
+				md:h-[225px] md:w-[325px]`]: isOpen
+			},
+			{
+				'duration-[400ms]': !isOpen
 			}
 		)}
 		onmousedown={() => (isOpen = true)}
@@ -32,12 +35,12 @@
 	>
 		<span
 			class={cn(
-				`${quintOut} absolute transition-all duration-[400ms]`,
+				`${quintOut} absolute transition-all`,
 				{
-					'top-3 left-4 origin-top-left translate-0 text-zinc-400': isOpen
+					'top-3 left-4 origin-top-left translate-0 text-zinc-400 duration-[400ms]': isOpen
 				},
 				{
-					'top-1/2 left-1/2 origin-center -translate-1/2': !isOpen
+					'top-1/2 left-1/2 origin-center -translate-1/2 duration-500': !isOpen
 				}
 			)}
 		>

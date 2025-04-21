@@ -1,8 +1,6 @@
 ---
 import { cn } from '@utils/cn';
 
-const pathname = Astro.url.pathname;
-
 import HomeIcon from '@icons/MingcuteHome7Line.svg';
 import WorkIcon from '@icons/BytesizePortfolio.svg';
 import DesignIcon from '@icons/IconoirDesignNib.svg';
@@ -22,12 +20,12 @@ const navLinks = [
 			href={href}
 			aria-label={label}
 			data-text={label}
+			data-href={href}
 			target={target}
 			class={cn(
 				`nav-button relative flex items-center justify-center gap-x-2 rounded-md border border-transparent
 				px-2.5 py-2.5 text-sm leading-none tracking-tight text-zinc-500 hover:border-zinc-200/50
-				hover:bg-zinc-100/80 hover:text-black md:text-base`,
-				target === '_self' && pathname === href ? 'text-black' : ''
+				hover:bg-zinc-100/80 hover:text-black md:text-base`
 			)}
 		>
 			<Icon class="size-6 md:size-5" />
@@ -66,3 +64,25 @@ const navLinks = [
 		}
 	}
 </style>
+
+<script>
+	function updatePathname() {
+		const currentPath = window.location.pathname;
+		const navButtons = document.querySelectorAll('.nav-button[target="_self"]');
+
+		navButtons.forEach((button) => {
+			const buttonHref = button.getAttribute('data-href');
+			if (buttonHref === currentPath) {
+				button.classList.remove('text-zinc-500');
+				button.classList.add('text-black');
+			} else {
+				button.classList.remove('text-black');
+				button.classList.add('text-zinc-500');
+			}
+		});
+	}
+
+	updatePathname();
+
+	window.addEventListener('popstate', updatePathname);
+</script>

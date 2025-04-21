@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { cn } from '@utils/cn';
+	import { onMouseDownOutside } from '@utils/clickOutside';
 
 	let isOpen: boolean = $state(false);
 </script>
@@ -10,18 +11,19 @@
 >
 	<button
 		class={cn(
-			`relative flex h-10 w-[125px] origin-center cursor-pointer rounded-[5rem] border border-zinc-200
-			bg-white transition-all duration-300`,
+			`ease-[cubic-bezier(0.22, 1, 0.36, 1)] relative flex h-10 w-[125px] origin-center cursor-pointer
+			rounded-[5rem] border border-zinc-200 bg-white transition-all duration-300`,
 			{
 				'h-[200px] w-[250px] rounded-md md:h-[275px] md:w-[325px]': isOpen
 			}
 		)}
-		onclick={() => (isOpen = !isOpen)}
+		onmousedown={() => (isOpen = true)}
+		use:onMouseDownOutside={() => (isOpen = false)}
 	>
 		<span
 			class={cn(
-				` absolute top-1/2 left-1/2 -translate-1/2 text-base font-medium tracking-tight transition-all
-				duration-300 ease-in-out`,
+				` ease-[cubic-bezier(0.22, 1, 0.36, 1)] absolute top-1/2 left-1/2 -translate-1/2 text-base
+				font-medium tracking-tight transition-all duration-300`,
 				{
 					'top-3 left-4 origin-top-left translate-0 text-zinc-400': isOpen
 				},

@@ -20,15 +20,15 @@
 		role="button"
 		tabindex="0"
 		class={cn(
-			`ease-[cubic-bezier(0.22, 1, 0.36, 1)] relative flex h-10 w-[125px] origin-center cursor-pointer
-			rounded-[2rem] border border-zinc-200 bg-white text-sm font-medium tracking-tight transition-all
-			md:text-base`,
+			`ease-[cubic-bezier(0.22, 1, 0.36, 1)] relative flex h-10 w-[112px] origin-center cursor-pointer
+			rounded-3xl border border-zinc-200 bg-white text-sm font-medium tracking-tight transition-all
+			md:w-[128px] md:text-base`,
 			{
-				[`h-[150px] w-[250px] cursor-default rounded-xl inset-ring-4 inset-ring-zinc-100 duration-[400ms]
-				md:h-[225px] md:w-[325px]`]: isOpen
+				[`h-[150px] w-[250px] cursor-default rounded-xl inset-ring-4 inset-ring-zinc-100 duration-[500ms]
+				md:h-[175px] md:w-[325px]`]: isOpen
 			},
 			{
-				'duration-[300ms]': !isOpen
+				'duration-[400ms]': !isOpen
 			}
 		)}
 		onmousedown={() => (isOpen = true)}
@@ -40,10 +40,10 @@
 			class={cn(
 				'ease-[cubic-bezier(0.22, 1, 0.36, 1)] absolute transition-all select-none',
 				{
-					'top-3 left-4 origin-top-left text-zinc-400 duration-[300ms]': isOpen
+					'top-3 left-4 origin-top-left text-zinc-400 duration-[400ms]': isOpen
 				},
 				{
-					'top-1/2 left-1/2 origin-center -translate-1/2 duration-[400ms]': !isOpen
+					'top-1/2 left-1/2 origin-center -translate-1/2 duration-[500ms]': !isOpen
 				}
 			)}
 		>
@@ -64,23 +64,28 @@
 				spellcheck="false"
 				bind:value={textArea}
 			></textarea>
-			<button
-				type="submit"
+			<div
 				class={cn(
-					`ease-[cubic-bezier(0.22, 1, 0.36, 1)] absolute ml-auto flex-nowrap rounded-md bg-gradient-to-b
-					from-amber-300 to-amber-400 leading-none tracking-tight text-yellow-800 transition-all
-					duration-[300ms]`,
+					`ease-[cubic-bezier(0.22, 1, 0.36, 1)] will-change-[opacity, transform] absolute h-6 w-26 text-xs
+					transition-all md:h-8 md:w-30 md:text-sm`,
 					{
-						'top-1/2 left-1/2 h-0 w-0 origin-center -translate-1/2 text-[0px] opacity-0': !isOpen
+						'right-3 bottom-3 origin-bottom-right scale-100 opacity-100 duration-[400ms] ': isOpen
 					},
 					{
-						[` right-2 bottom-2 h-6 w-26 origin-bottom-right text-xs opacity-100 md:right-3 md:bottom-3 md:h-8
-						md:w-30 md:text-sm`]: isOpen
+						'right-1/4 bottom-1/4 origin-center translate-1/4 scale-0 opacity-0 duration-[400ms]':
+							!isOpen
 					}
 				)}
 			>
-				Send feedback
-			</button>
+				<button
+					type="submit"
+					class="flex h-fit min-h-full w-fit min-w-full flex-nowrap items-center justify-center rounded-md border
+						border-amber-100 bg-gradient-to-b from-amber-300 to-amber-400 leading-none tracking-tight
+						text-yellow-800"
+				>
+					Send feedback
+				</button>
+			</div>
 		</form>
 	</div>
 	<p class="absolute -bottom-3 text-xs text-zinc-500 md:text-zinc-700">

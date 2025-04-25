@@ -20,16 +20,14 @@
 		role="button"
 		tabindex="0"
 		class={cn(
-			`ease-[cubic-bezier(0.22, 1, 0.36, 1)] transition-[height, width, border-radius, box-shadow] relative
-			flex h-10 w-[112px] origin-center cursor-pointer rounded-3xl border border-zinc-200 bg-white text-sm
-			font-medium tracking-tight will-change-[height,width,border-radius,box-shadow] md:w-[128px]
-			md:text-base`,
+			`ease-[cubic-bezier(0.22, 1, 0.36, 1)] relative flex origin-center rounded-lg border border-zinc-200
+			bg-white text-base font-medium tracking-tight transition-all duration-500 `,
 			{
-				[`h-[150px] w-[250px] cursor-default rounded-xl inset-ring-4 inset-ring-zinc-100 duration-[500ms]
-				md:h-[175px] md:w-[325px]`]: isOpen
+				'h-[150px] w-[250px] cursor-default inset-ring-4 inset-ring-zinc-100 md:h-[175px] md:w-[325px]':
+					isOpen
 			},
 			{
-				'duration-[400ms]': !isOpen
+				'h-10 w-[100px] cursor-pointer ': !isOpen
 			}
 		)}
 		onmousedown={() => (isOpen = true)}
@@ -39,13 +37,13 @@
 	>
 		<span
 			class={cn(
-				`ease-[cubic-bezier(0.22, 1, 0.36, 1)] transition-[transform, color] will-change-[transform, color]
-				absolute select-none`,
+				`ease-[cubic-bezier(0.22, 1, 0.36, 1)] will-change-[transform, left, top, color]
+				transition-[transform, left, top, color] absolute h-fit w-fit duration-500 select-none`,
 				{
-					'top-3 left-4 origin-top-left text-zinc-400 duration-[400ms]': isOpen
+					'top-3 left-4 origin-top-left text-zinc-400 ': isOpen
 				},
 				{
-					'top-1/2 left-1/2 origin-center -translate-1/2 duration-[500ms]': !isOpen
+					'top-[7.5px] left-[13.5px] origin-center text-black': !isOpen
 				}
 			)}
 		>
@@ -54,7 +52,7 @@
 		<form>
 			<textarea
 				class={cn(
-					`absolute top-3 left-4 h-3/4 w-[calc(100%-2rem)] resize-none overflow-hidden border-none
+					`absolute top-3.5 left-4 h-3/4 w-[calc(100%-2rem)] resize-none overflow-hidden border-none
 					leading-tight outline-none`,
 					{
 						hidden: !isOpen
@@ -69,21 +67,20 @@
 			<div
 				class={cn(
 					`ease-[cubic-bezier(0.22, 1, 0.36, 1)] will-change-[opacity, transform] transition-[opacity,
-					transform] absolute h-6 w-26 text-xs md:h-8 md:w-30 md:text-sm`,
+					transform] absolute h-6 w-26 duration-500 md:h-8 md:w-30`,
 					{
-						'right-3 bottom-3 origin-bottom-right scale-100 opacity-100 duration-[400ms] ': isOpen
+						'right-3 bottom-3 origin-bottom-right scale-100 opacity-100 ': isOpen
 					},
 					{
-						'right-1/4 bottom-1/4 origin-center translate-1/4 scale-0 opacity-0 duration-[400ms]':
-							!isOpen
+						'right-1/4 bottom-1/4 origin-center translate-1/4 scale-0 opacity-0 ': !isOpen
 					}
 				)}
 			>
 				<button
 					type="submit"
 					class="flex h-fit min-h-full w-fit min-w-full flex-nowrap items-center justify-center rounded-md border
-						border-amber-100 bg-gradient-to-b from-amber-300 to-amber-400 leading-none tracking-tight
-						text-yellow-800"
+						border-amber-100 bg-gradient-to-b from-amber-300 to-amber-400 text-xs leading-none tracking-tight
+						text-yellow-800 md:text-sm"
 				>
 					Send feedback
 				</button>

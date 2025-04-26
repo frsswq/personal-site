@@ -10,6 +10,9 @@
 			textArea = '';
 		}
 	});
+
+	const easeOutQuint: string = 'ease-[cubic-bezier(0.22, 1, 0.36, 1)]';
+	const duration: string = 'duration-500';
 </script>
 
 <div
@@ -20,14 +23,15 @@
 		role="button"
 		tabindex="0"
 		class={cn(
-			`ease-[cubic-bezier(0.22, 1, 0.36, 1)] relative flex origin-center rounded-lg border border-zinc-200
-			bg-white text-base font-medium tracking-tight transition-all duration-500 `,
+			` relative flex origin-center rounded-lg border border-zinc-200 bg-white text-base font-medium
+			tracking-tight `,
+			`${duration} ${easeOutQuint} transition-[width, height, inset-ring]`,
 			{
 				'h-[150px] w-[250px] cursor-default inset-ring-4 inset-ring-zinc-100 md:h-[175px] md:w-[325px]':
 					isOpen
 			},
 			{
-				'h-10 w-[100px] cursor-pointer ': !isOpen
+				'h-10 w-[100px] cursor-pointer inset-ring-0 inset-ring-white': !isOpen
 			}
 		)}
 		onmousedown={() => (isOpen = true)}
@@ -37,8 +41,8 @@
 	>
 		<span
 			class={cn(
-				`ease-[cubic-bezier(0.22, 1, 0.36, 1)] will-change-[transform, left, top, color]
-				transition-[transform, left, top, color] absolute h-fit w-fit duration-500 select-none`,
+				' absolute h-fit w-fit select-none',
+				`${duration} ${easeOutQuint} transition-[transform, left, top, color]`,
 				{
 					'top-3 left-4 origin-top-left text-zinc-400 ': isOpen
 				},
@@ -49,10 +53,10 @@
 		>
 			{textArea ? '' : 'Feedback'}
 		</span>
-		<form>
+		<form class="flex flex-col">
 			<textarea
 				class={cn(
-					`absolute top-3.5 left-4 h-3/4 w-[calc(100%-2rem)] resize-none overflow-hidden border-none
+					`absolute top-3.5 left-4 h-[60%] w-[calc(100%-2rem)] resize-none overflow-auto border-none
 					leading-tight outline-none`,
 					{
 						hidden: !isOpen
@@ -64,15 +68,31 @@
 				spellcheck="false"
 				bind:value={textArea}
 			></textarea>
-			<div
+			<hr
 				class={cn(
-					`ease-[cubic-bezier(0.22, 1, 0.36, 1)] will-change-[opacity, transform] transition-[opacity,
-					transform] absolute h-6 w-26 duration-500 md:h-8 md:w-30`,
+					'absolute bottom-[30%] left-1 h-0 w-[calc(100%-0.5rem)] text-zinc-200',
+					`border-[0.75px] border-dashed
+					[border-image:repeating-linear-gradient(90deg,#e4e4e7_0_4px,transparent_4px_8px)_1]`,
+					`${duration} ${easeOutQuint} origin-bottom`,
 					{
-						'right-3 bottom-3 origin-bottom-right scale-100 opacity-100 ': isOpen
+						'scale-0 opacity-0': !isOpen
 					},
 					{
-						'right-1/4 bottom-1/4 origin-center translate-1/4 scale-0 opacity-0 ': !isOpen
+						'scale-100 opacity-100': isOpen
+					}
+				)}
+			/>
+
+			<div
+				class={cn(
+					'absolute right-3 bottom-3 h-6 w-26 md:h-8 md:w-30',
+					`${duration} ${easeOutQuint} will-change-[opacity, transform] transition-[opacity,transform
+					origin-bottom-right`,
+					{
+						' scale-100 opacity-100 ': isOpen
+					},
+					{
+						' scale-0 opacity-0 ': !isOpen
 					}
 				)}
 			>

@@ -39,7 +39,7 @@
 					class="relative -my-1.5 -mr-2.25 -ml-1.25 flex cursor-pointer items-center justify-center gap-x-0.5
 						rounded-sm py-1.5 pr-2.25 pl-1.25 text-zinc-700 before:absolute before:inset-0
 						focus-visible:outline-[1.75px] focus-visible:outline-zinc-500 focus-visible:before:scale-100"
-					onclick={() => (activeButton = index)}
+					onmousedown={() => (activeButton = index)}
 				>
 					<Icon className="size-3.5 md:size-5 md:mb-[1px]" />
 					<span class="text-sm leading-none font-medium tracking-tight md:text-lg">{text}</span>
@@ -51,7 +51,7 @@
 
 <style>
 	.clip-button {
-		transition: clip-path 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+		transition: clip-path 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 		will-change: clip-path;
 
 		&[data-active-button='0'] {

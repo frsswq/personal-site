@@ -150,13 +150,13 @@
 		<button
 			class="button-top group m-[2.5px] mb-0 flex size-8 cursor-pointer items-center justify-center
 				rounded-t-[7px] border-b-[0.75px] border-black"
-			onclick={() => increment()}
+			onmousedown={() => increment()}
 			><CaretUp className="text-zinc-800 size-6 group-hover:text-black"></CaretUp></button
 		>
 		<button
 			class="button-bottom group m-[2.5px] mt-0 flex size-8 cursor-pointer items-center justify-center
 				rounded-b-[7px] border-t-[0.75px] border-black"
-			onclick={() => decrement()}
+			onmousedown={() => decrement()}
 			><CaretDown className="text-zinc-800 size-6 group-hover:text-black"></CaretDown></button
 		>
 	</div>

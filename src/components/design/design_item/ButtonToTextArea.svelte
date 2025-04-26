@@ -89,10 +89,10 @@
 					`${duration} ${easeOutQuint} will-change-[opacity, transform] transition-[opacity,transform
 					origin-bottom-right`,
 					{
-						' scale-100 opacity-100 ': isOpen
+						'scale-100 opacity-100': isOpen
 					},
 					{
-						' scale-0 opacity-0 ': !isOpen
+						'scale-0 opacity-0': !isOpen
 					}
 				)}
 			>

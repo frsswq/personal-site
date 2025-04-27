@@ -28,7 +28,7 @@ const navLinks = [
 				hover:bg-zinc-100/80 hover:text-black md:text-base`
 			)}
 		>
-			<Icon class="size-6 md:size-5" />
+			<Icon class="icon size-6 md:size-5" />
 		</a>
 	))
 }
@@ -51,6 +51,10 @@ const navLinks = [
 
 	.nav-button:hover::before {
 		display: block;
+	}
+
+	.icon {
+		place-self: center;
 	}
 
 	@keyframes scale-in {

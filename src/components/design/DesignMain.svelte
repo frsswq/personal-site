@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { designStore } from '@utils/shuffle.svelte';
+	import ShuffleButton from './ShuffleButton.svelte';
 </script>
 
 <main>
@@ -24,6 +25,9 @@
 			</div>
 		{/each}
 	</section>
+	<div class="flex items-center justify-center">
+		<ShuffleButton />
+	</div>
 </main>
 
 <style>

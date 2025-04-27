@@ -25,9 +25,7 @@
 			</div>
 		{/each}
 	</section>
-	<div class="flex items-center justify-center">
-		<ShuffleButton />
-	</div>
+	<ShuffleButton />
 </main>
 
 <style>

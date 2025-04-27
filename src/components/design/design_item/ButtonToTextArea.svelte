@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { cn } from '@utils/cn';
 	import { onMouseDownOutside } from '@utils/outside';
+	import Spinner from '@components/icons/SvgSpinnersBarsRotateFade.svelte';
 
 	let isOpen: boolean = $state(false);
 	let textArea: string = $state('');
+	let isSubmitting: boolean = $state(false);
 
 	$effect(() => {
 		if (!isOpen) {
@@ -13,6 +15,16 @@
 
 	const easeOutQuint: string = 'ease-[cubic-bezier(0.22, 1, 0.36, 1)]';
 	const duration: string = 'duration-500';
+
+	async function handleSubmit(e: SubmitEvent) {
+		isSubmitting = true;
+		try {
+			await new Promise((resolve) => setTimeout(resolve, 1000));
+			isOpen = false;
+		} finally {
+			isSubmitting = false;
+		}
+	}
 </script>
 
 <div
@@ -37,7 +49,10 @@
 		onmousedown={() => (isOpen = true)}
 		onkeydown={(e) =>
 			e.key === 'Enter' ? (isOpen = true) : e.key === 'Escape' ? (isOpen = false) : null}
-		use:onMouseDownOutside={() => (isOpen = false)}
+		use:onMouseDownOutside={() => {
+			if (isSubmitting) return;
+			isOpen = false;
+		}}
 	>
 		<span
 			class={cn(
@@ -53,7 +68,13 @@
 		>
 			{textArea ? '' : 'Feedback'}
 		</span>
-		<form class="flex flex-col">
+		<form
+			class="flex flex-col"
+			onsubmit={(e) => {
+				e.preventDefault();
+				handleSubmit(e);
+			}}
+		>
 			<textarea
 				class={cn(
 					`absolute top-3.5 left-4 h-[60%] w-[calc(100%-2rem)] resize-none overflow-auto border-none
@@ -98,11 +119,16 @@
 			>
 				<button
 					type="submit"
+					disabled={isSubmitting}
 					class="flex h-fit min-h-full w-fit min-w-full flex-nowrap items-center justify-center rounded-md border
 						border-amber-100 bg-gradient-to-b from-amber-300 to-amber-400 text-xs leading-none tracking-tight
 						text-yellow-800 md:text-sm"
 				>
-					Send feedback
+					{#if isSubmitting}
+						<Spinner className="size-5 text-amber-600" />
+					{:else}
+						Send feedback
+					{/if}
 				</button>
 			</div>
 		</form>

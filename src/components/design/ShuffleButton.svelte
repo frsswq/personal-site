@@ -10,7 +10,7 @@
 		tracking-tight text-zinc-500 md:text-base`,
 		`border border-transparent hover:border-zinc-200 hover:bg-zinc-100/80 hover:text-black
 		md:border-zinc-200 md:bg-zinc-100/80`,
-		'fixed right-2 bottom-1.5 z-50 md:right-6 md:bottom-6'
+		'fixed right-2 bottom-1.5 z-50 md:right-4 md:bottom-4'
 	)}
 	onclick={() => designStore.shuffle()}
 	aria-label="Shuffle"

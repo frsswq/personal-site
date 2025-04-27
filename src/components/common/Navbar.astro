@@ -1,14 +1,21 @@
 ---
 import NavLink from './NavLink.astro';
+import ShuffleButton from './ShuffleButton.svelte';
 ---
 
 <nav>
-	<div class="navbar border-t-[1.25px] border-zinc-200 bg-white md:border-b-[1.25px]">
+	<div class="navbar relative border-t-[1.25px] border-zinc-200 bg-white md:border-b-[1.25px]">
 		<div
 			class="flex h-15 max-w-[1440px] items-center justify-center gap-x-2 leading-none tracking-tighter
 				md:mx-auto md:gap-x-0"
 		>
 			<NavLink />
+		</div>
+		<div
+			class="absolute top-0 right-2.5 flex h-15 max-w-[1440px] items-center justify-center leading-none
+				tracking-tighter"
+		>
+			<ShuffleButton client:load />
 		</div>
 	</div>
 </nav>

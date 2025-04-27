@@ -1,11 +1,5 @@
 <script lang="ts">
-	import type { Component } from 'svelte';
-
-	const paths: Record<string, { default: Component }> = import.meta.glob('./design_item/*.svelte', {
-		eager: true
-	});
-
-	const designItems: Component[] = Object.values(paths).map((path) => path.default);
+	import { designStore } from '@utils/shuffle.svelte';
 </script>
 
 <main>
@@ -21,7 +15,7 @@
 		Powered by Svelte and Tailwind CSS
 	</p>
 	<section class="mx-auto w-fit columns-1 gap-4 py-8 md:columns-2 md:py-12 xl:columns-3">
-		{#each designItems as Item}
+		{#each designStore.designItems as Item, index (index)}
 			<div
 				class="mb-2.5 flex w-[18.75rem] break-inside-avoid items-center justify-center rounded-xl border
 					border-zinc-200 bg-zinc-50 p-6.25 md:mb-4 md:w-[23.4375rem]"

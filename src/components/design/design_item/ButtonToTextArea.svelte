@@ -1,4 +1,6 @@
 <script lang="ts">
+	// TODO: fix anim performance
+
 	import { cn } from '@utils/cn';
 	import { onMouseDownOutside } from '@utils/outside';
 	import Spinner from '@components/icons/SvgSpinnersBarsRotateFade.svelte';
@@ -35,15 +37,15 @@
 		role="button"
 		tabindex="0"
 		class={cn(
-			` relative flex origin-center rounded-lg border border-zinc-200 bg-white text-base font-medium
-			tracking-tight `,
+			` relative flex origin-center overflow-hidden rounded-lg border border-zinc-200 bg-white text-base
+			font-medium tracking-tight `,
 			`${duration} ${easeOutQuint} transition-[width, height, inset-ring]`,
 			{
 				'h-[150px] w-[250px] cursor-default inset-ring-4 inset-ring-zinc-100 md:h-[175px] md:w-[325px]':
 					isOpen
 			},
 			{
-				'h-10 w-[100px] cursor-pointer inset-ring-0 inset-ring-white': !isOpen
+				'h-10 w-25 cursor-pointer inset-ring-0 inset-ring-white': !isOpen
 			}
 		)}
 		onmousedown={() => (isOpen = true)}
@@ -56,13 +58,14 @@
 	>
 		<span
 			class={cn(
-				' absolute h-fit w-fit select-none',
-				`${duration} ${easeOutQuint} transition-[transform, left, top, color]`,
+				'm-auto select-none',
+				`${duration} ${easeOutQuint} transition-[transform, color]`,
 				{
-					'top-3 left-4 origin-top-left text-zinc-400 ': isOpen
+					[`origin-top-left -translate-x-18.25 -translate-y-12.75 text-zinc-400 md:-translate-x-27.5
+					md:-translate-y-15.75 `]: isOpen
 				},
 				{
-					'top-[7.5px] left-[13.5px] origin-center text-black': !isOpen
+					'origin-center text-black': !isOpen
 				}
 			)}
 		>
@@ -94,7 +97,7 @@
 					'absolute bottom-[30%] left-1 h-0 w-[calc(100%-0.5rem)] text-zinc-200',
 					`border-[0.75px] border-dashed
 					[border-image:repeating-linear-gradient(90deg,#e4e4e7_0_4px,transparent_4px_8px)_1]`,
-					`${duration} ${easeOutQuint} origin-bottom`,
+					`${duration} ${easeOutQuint} transition-[transform, opacity] origin-bottom`,
 					{
 						'scale-0 opacity-0': !isOpen
 					},

@@ -33,19 +33,17 @@
 	class="relative flex min-h-[200px] min-w-[250px] items-center justify-center bg-transparent
 		md:min-h-[275px] md:min-w-[325px]"
 >
-	<div
-		role="button"
-		tabindex="0"
+	<button
+		id="main-button"
 		class={cn(
-			` relative flex origin-center overflow-hidden rounded-lg border border-zinc-200 bg-white text-base
-			font-medium tracking-tight `,
-			`${duration} ${easeOutQuint} transition-[width, height, inset-ring]`,
+			' relative h-[40px] w-[100px] origin-center bg-white text-base font-medium tracking-tight',
+			`${duration} ${easeOutQuint} transition-transform`,
 			{
-				'h-[150px] w-[250px] cursor-default inset-ring-4 inset-ring-zinc-100 md:h-[175px] md:w-[325px]':
-					isOpen
+				[`scale-x-[calc(250/100)] scale-y-[calc(150/40)] cursor-default rounded-xs md:scale-x-[calc(325/100)]
+				md:scale-y-[calc(175/40)]`]: isOpen
 			},
 			{
-				'h-10 w-25 cursor-pointer inset-ring-0 inset-ring-white': !isOpen
+				'scale-100 cursor-pointer rounded-md': !isOpen
 			}
 		)}
 		onmousedown={() => (isOpen = true)}
@@ -58,86 +56,25 @@
 	>
 		<span
 			class={cn(
-				'm-auto select-none',
-				`${duration} ${easeOutQuint} transition-[transform, color]`,
+				'flex h-[40px] w-[100px] origin-center items-center justify-center select-none',
+				`${duration} ${easeOutQuint} transition-[translate, color]`,
 				{
-					[`origin-top-left -translate-x-18.25 -translate-y-12.75 text-zinc-400 md:-translate-x-27.5
-					md:-translate-y-15.75 `]: isOpen
+					[`text-zinc-400 md:-translate-x-8 md:-translate-y-3 md:scale-x-[calc(100/325)]
+					md:scale-y-[calc(40/175)]`]: isOpen
 				},
 				{
-					'origin-center text-black': !isOpen
+					' translate-0 scale-100 text-black': !isOpen
 				}
 			)}
 		>
 			{textArea ? '' : 'Feedback'}
 		</span>
-		<form
-			class="flex flex-col"
-			onsubmit={(e) => {
-				e.preventDefault();
-				handleSubmit(e);
-			}}
-		>
-			<textarea
-				class={cn(
-					`absolute top-3.5 left-4 h-[60%] w-[calc(100%-2rem)] resize-none overflow-auto border-none
-					leading-tight outline-none`,
-					{
-						hidden: !isOpen
-					}
-				)}
-				required
-				minlength="1"
-				maxlength="300"
-				spellcheck="false"
-				bind:value={textArea}
-			></textarea>
-			<hr
-				class={cn(
-					'absolute bottom-[30%] left-1 h-0 w-[calc(100%-0.5rem)] text-zinc-200',
-					`border-[0.75px] border-dashed
-					[border-image:repeating-linear-gradient(90deg,#e4e4e7_0_4px,transparent_4px_8px)_1]`,
-					`${duration} ${easeOutQuint} transition-[transform, opacity] origin-bottom`,
-					{
-						'scale-0 opacity-0': !isOpen
-					},
-					{
-						'scale-100 opacity-100': isOpen
-					}
-				)}
-			/>
-
-			<div
-				class={cn(
-					'absolute right-3 bottom-3 h-6 w-26 md:h-8 md:w-30',
-					`${duration} ${easeOutQuint} will-change-[opacity, transform] transition-[opacity,transform
-					origin-bottom-right`,
-					{
-						'scale-100 opacity-100': isOpen
-					},
-					{
-						'scale-0 opacity-0': !isOpen
-					}
-				)}
-			>
-				<button
-					type="submit"
-					disabled={isSubmitting}
-					class="flex h-fit min-h-full w-fit min-w-full flex-nowrap items-center justify-center rounded-md border
-						border-amber-100 bg-gradient-to-b from-amber-300 to-amber-400 text-xs leading-none tracking-tight
-						text-yellow-800 md:text-sm"
-				>
-					{#if isSubmitting}
-						<Spinner className="size-5 text-amber-600" />
-					{:else}
-						Send feedback
-					{/if}
-				</button>
-			</div>
-		</form>
-	</div>
-	<p class="absolute -bottom-3 text-xs text-zinc-500 md:text-zinc-700">
-		remake of <a class="hover:text-sky-500" href="https://x.com/emilkowalski_" target="_blank"
+	</button>
+	<p class="absolute -top-1.5 -left-1 text-[10px] text-zinc-500 md:text-xs">
+		Performant [unfinished]
+	</p>
+	<p class="absolute -bottom-3 text-[10px] text-zinc-500 md:text-xs">
+		Remake of <a class="hover:text-sky-500" href="https://x.com/emilkowalski_" target="_blank"
 			>@emilkowalski_</a
 		> design
 	</p>

@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import Navbar from '../components/common/Navbar.astro';
 
 interface Props {
 	title: string;
@@ -28,7 +27,6 @@ const { title, description } = Astro.props;
 		<meta name="description" content={description} />
 	</head>
 	<body>
-		<Navbar />
 		<slot />
 	</body>
 </html>
@@ -39,8 +37,5 @@ const { title, description } = Astro.props;
 		font-feature-settings:
 			'liga' 1,
 			'calt' 1;
-		@media (width <= 48rem) {
-			padding-bottom: 3.75rem;
-		}
 	}
 </style>

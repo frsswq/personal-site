@@ -1,20 +1,17 @@
 <script lang="ts">
 	import { cn } from '@utils/cn';
-	import Icon from '@components/icons/MingcuteRandomLine.svelte';
 	import { designStore } from '@utils/shuffle.svelte';
 </script>
 
 <button
 	class={cn(
-		`flex cursor-pointer items-center justify-center rounded-md px-2.5 py-2.5 text-sm leading-none
-		tracking-tight text-zinc-500 md:text-base`,
-		`border border-transparent hover:border-zinc-200 hover:bg-zinc-100/80 hover:text-black
-		md:border-zinc-200 md:bg-zinc-100/80`,
-		'fixed right-2 bottom-1.5 z-50 md:right-4 md:bottom-4'
+		'flex cursor-pointer items-center justify-center text-base leading-none font-medium tracking-tight',
+		'bg-zinc-50/10 text-zinc-700 ring ring-zinc-950/10 hover:bg-zinc-50 hover:text-black',
+		'inset-shad rounded-sm px-2.5 py-2'
 	)}
 	onclick={() => designStore.shuffle()}
 	aria-label="Shuffle"
 	title="Shuffle"
 >
-	<Icon className="size-6 md:size-8" />
+	Shuffle
 </button>

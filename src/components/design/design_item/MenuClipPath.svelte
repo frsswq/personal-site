@@ -15,8 +15,8 @@
 </script>
 
 <div
-	class="flex h-[2.3rem] w-full items-center justify-center rounded-[0.5rem] bg-zinc-200 select-none
-		md:h-[2.75rem]"
+	class="flex h-[2.3rem] w-[250px] items-center justify-center rounded-[0.5rem] bg-zinc-200 select-none
+		md:h-[2.75rem] md:w-[328px]"
 >
 	<div class="relative mx-auto flex w-fit items-center justify-center">
 		<div

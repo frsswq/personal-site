@@ -17,7 +17,7 @@
 
 <div class="size-fit rounded-[0.9375rem] bg-zinc-200 p-0.75 md:rounded-[1.25rem] md:p-1">
 	{@render WhiteKeycaps({ buttonClass: 'rounded-t-xl md:rounded-t-2xl', startNum: 7 })}
-	{@render WhiteKeycaps({ startNum: 4 })}
+	{@render WhiteKeycaps({ buttonClass: '', startNum: 4 })}
 	{@render WhiteKeycaps({ buttonClass: 'rounded-b-xl md:rounded-b-2xl', startNum: 1 })}
 </div>
 
@@ -128,6 +128,7 @@
 		left: calc(var(--button-size) * 0.1125);
 		height: calc(var(--button-size) * 0.775);
 		width: calc(var(--button-size) * 0.775);
+
 		background: var(--gray-100);
 		border-radius: 0.5rem;
 		box-shadow: 0 0 0 0.75px rgba(255, 255, 255, 0.8);
@@ -159,7 +160,6 @@
 			var(--gray-500)
 		);
 	}
-
 
 	.button:hover::before {
 		background: var(--gray-200);

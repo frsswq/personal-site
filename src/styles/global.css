@@ -1,2 +1,8 @@
 @import 'tailwindcss';
 @import './typeface.css';
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}

@@ -1,4 +1,4 @@
-<button popovertarget="info" class="top-parent cursor-pointer">
+<button popovertarget="info" class="top-parent flex cursor-pointer">
 	<div class="parent parent-1 z-3">
 		<div class="folder folder-1 bg-amber-200 leading-none tracking-tight"></div>
 	</div>
@@ -16,13 +16,13 @@
 <div
 	popover
 	id="info"
-	class="size-fit rounded-lg border border-zinc-200 bg-zinc-50/80 py-1.5 pr-2 pl-2.5 text-center text-xs
-		leading-none tracking-tight text-black tabular-nums select-none md:text-sm"
+	class="size-fit rounded-lg border border-zinc-200 bg-zinc-50/80 py-1.5 pr-2 pl-2.5 text-center
+		text-xs leading-none tracking-tight text-black tabular-nums select-none md:text-sm"
 >
 	Last Modified:
 	<span
-		class="ml-0.5 inline-block rounded-md border border-zinc-200/80 bg-white px-1.5 py-1 leading-none
-			font-medium tracking-tighter">18/03/2025</span
+		class="ml-0.5 inline-block rounded-md border border-zinc-200/80 bg-white px-1.5 py-1
+			leading-none font-medium tracking-tighter">18/03/2025</span
 	>
 </div>
 
